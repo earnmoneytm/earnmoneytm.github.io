@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Earn Real Money by Clicking Ads</title>
     <style>
-        /* General Styles */
+        /* Estilos generales */
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
@@ -18,7 +18,6 @@
             min-height: 100vh;
         }
 
-        /* Header */
         header {
             background-color: #1e88e5;
             width: 100%;
@@ -37,61 +36,18 @@
             font-weight: bold;
         }
 
-        /* Modal Styles */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed;
-            z-index: 1000; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto; /* 15% from the top and centered */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 300px; /* Could be more or less, depending on screen size */
-            border-radius: 10px;
-            text-align: center;
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        /* Main Section */
         main {
-            margin-top: 150px; /* Space for the fixed header */
+            margin-top: 150px;
             text-align: center;
             width: 90%;
             max-width: 1000px;
-        }
-
-        .instructions {
-            margin-top: 20px; /* Space for header */
         }
 
         .ad-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 20px;
-            margin-top: 30px; /* Added margin to avoid header overlap */
+            margin-top: 30px;
         }
 
         .ad-section {
@@ -141,16 +97,15 @@
             border-radius: 8px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            opacity: 0.5; /* Initially disabled */
-            pointer-events: none; /* Disable interaction */
+            opacity: 0.5;
+            pointer-events: none;
         }
 
         #withdraw-button:enabled {
-            opacity: 1; /* Enable the button */
-            pointer-events: auto; /* Enable interaction */
+            opacity: 1;
+            pointer-events: auto;
         }
 
-        /* Footer */
         footer {
             margin-top: 40px;
             padding: 20px;
@@ -159,14 +114,6 @@
             width: 100%;
             color: #666;
             font-size: 0.9rem;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 600px) {
-            .ad-button {
-                padding: 12px 20px;
-                font-size: 1rem;
-            }
         }
     </style>
 </head>
@@ -179,53 +126,40 @@
     </header>
 
     <main>
-        <div class="modal" id="bonus-modal">
-            <div class="modal-content">
-                <span class="close" id="close-modal">&times;</span>
-                <h2>Claim Your $1.00 Bonus!</h2>
-                <p>Click the button below to claim your bonus:</p>
-                <button id="claim-bonus-button" class="ad-button" onclick="claimBonus()">Claim Bonus</button>
-            </div>
-        </div>
-
         <section class="instructions">
-            <h2 id="instructions-title">To start earning money:</h2>
-            <p id="instructions-text-1">Complete the short links by clicking on the ads below.</p>
-            <p id="instructions-text-2">You will earn between $0.17 and $0.26 for each ad you complete.</p>
-            <p id="instructions-text-3">You can click on as many ads as you want, unlimited times!</p>
+            <h2>To start earning money:</h2>
+            <p>Complete the short links by clicking on the ads below.</p>
+            <p>You will earn between $0.17 and $0.26 for each ad you complete.</p>
+            <p>You can click on as many ads as you want, unlimited times!</p>
         </section>
 
         <div class="ad-grid">
             <section class="ad-section">
-                <h2 id="ad-title-1">Ad 1</h2>
+                <h2>Ad 1</h2>
                 <a href="#" onclick="startAd(); return false;">
                     <button class="ad-button">Click on Ad 1</button>
                 </a>
-                <p id="timer-1" class="timer"></p>
             </section>
 
             <section class="ad-section">
-                <h2 id="ad-title-2">Ad 2</h2>
+                <h2>Ad 2</h2>
                 <a href="#" onclick="startAd(); return false;">
                     <button class="ad-button">Click on Ad 2</button>
                 </a>
-                <p id="timer-2" class="timer"></p>
             </section>
 
             <section class="ad-section">
-                <h2 id="ad-title-3">Ad 3</h2>
+                <h2>Ad 3</h2>
                 <a href="#" onclick="startAd(); return false;">
                     <button class="ad-button">Click on Ad 3</button>
                 </a>
-                <p id="timer-3" class="timer"></p>
             </section>
 
             <section class="ad-section">
-                <h2 id="ad-title-4">Ad 4</h2>
+                <h2>Ad 4</h2>
                 <a href="#" onclick="startAd(); return false;">
                     <button class="ad-button">Click on Ad 4</button>
                 </a>
-                <p id="timer-4" class="timer"></p>
             </section>
         </div>
 
@@ -243,77 +177,25 @@
     </footer>
 
     <script>
-        // Load balance from localStorage or initialize it
         let balance = parseFloat(localStorage.getItem('balance')) || 0;
-        let bonusClaimed = localStorage.getItem('bonusClaimed') === 'true';
 
-        // Update displayed balance
+        // Actualizar balance visual
         document.getElementById("balance").innerText = balance.toFixed(2);
 
         function startAd() {
-            // Simulate a click on the ad and redirect to the short link
-            const timerElement = document.getElementById("timer-1"); // Use a specific timer for ad
-            let waitTime = Math.floor(Math.random() * 1000) + 3000; // Random wait time between 3 and 4 seconds
-            timerElement.innerText = `Redirecting in ${waitTime / 1000} seconds...`;
-
-            // Simulate earnings but don't display them to the user
-            let earnings = (Math.random() * (0.26 - 0.17) + 0.17).toFixed(2);
-            balance += parseFloat(earnings);
-            localStorage.setItem('balance', balance); // Save balance to localStorage
-
-            // Redirect to the ad link after a random wait time
-            setTimeout(() => {
-                window.location.href = 'https://xenfly.com/EdJ9p7qW'; // Use the acortador link
-            }, waitTime);
-
-            // Clear the timer message after the wait
-            setTimeout(() => {
-                timerElement.innerText = ""; // Clear the timer message
-                // Update the withdraw button state
-                updateWithdrawButton();
-            }, waitTime);
+            // Redirigir al acortador
+            window.location.href = 'https://xenfly.com/EdJ9p7qW';
         }
 
-        function claimBonus() {
-            if (!bonusClaimed) {
-                balance += 1.00; // Add bonus to balance
-                localStorage.setItem('balance', balance); // Save balance to localStorage
-                bonusClaimed = true;
-                localStorage.setItem('bonusClaimed', 'true'); // Mark bonus as claimed
-                document.getElementById("balance").innerText = balance.toFixed(2);
-                document.getElementById("bonus-modal").style.display = "none";
-                updateWithdrawButton();
-            }
-        }
-
+        // Lógica de retirada de fondos
         function updateWithdrawButton() {
             const withdrawButton = document.getElementById("withdraw-button");
-            withdrawButton.disabled = balance < 20; // Disable button if balance is less than 20
+            withdrawButton.disabled = balance < 20;
         }
-
-        // Modal Logic
-        window.onload = function() {
-            if (!bonusClaimed) {
-                document.getElementById("bonus-modal").style.display = "block"; // Show modal on load if bonus not claimed
-            }
-        };
-
-        // Close Modal Logic
-        document.getElementById("close-modal").onclick = function() {
-            document.getElementById("bonus-modal").style.display = "none";
-        }
-
-        // Preventing back navigation and resetting balance
-        window.onbeforeunload = function() {
-            // Reset balance if the user tries to go back
-            alert("Going back will reset your balance to zero.");
-        }
-
-        // Show balance on load
-        document.getElementById("balance").innerText = balance.toFixed(2);
     </script>
 </body>
 </html>
+
 
 
 
