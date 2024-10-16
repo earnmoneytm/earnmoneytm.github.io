@@ -178,50 +178,40 @@
 
     <script>
         let balance = parseFloat(localStorage.getItem('balance')) || 0;
-        let token = '';
         let currentAdId = null;
         let currentEarnings = 0;
 
         // Actualizar balance visual
         document.getElementById("balance").innerText = balance.toFixed(2);
 
-        // Generar un token único para verificar si pasan por el acortador
-        function generateToken() {
-            return Math.random().toString(36).substr(2, 9);
-        }
-
         function startAd(adId) {
-            // Generar y almacenar token
-            token = generateToken();
-            localStorage.setItem('token', token);
             currentAdId = adId;
 
             // Generar un monto aleatorio entre 0.17 y 0.26 para el anuncio
             currentEarnings = (Math.random() * (0.26 - 0.17) + 0.17).toFixed(2);
 
-            // Redirigir al acortador con el token
-            window.location.href = 'https://xenfly.com/EdJ9p7qW?token=' + token + '&adId=' + adId + '&earnings=' + currentEarnings;
+            // Redirigir al acortador
+            window.location.href = 'https://xenfly.com/EdJ9p7qW?adId=' + adId + '&earnings=' + currentEarnings;
         }
 
         // Función para acreditar el saldo después de regresar
         function creditEarnings() {
             const urlParams = new URLSearchParams(window.location.search);
-            const tokenFromUrl = urlParams.get('token');
+            const completed = urlParams.get('completed');
             const adId = urlParams.get('adId');
+            const earnings = urlParams.get('earnings');
 
-            // Verificar si el token es válido
-            if (tokenFromUrl === token && adId == currentAdId) {
+            // Verificar si se completó el anuncio
+            if (completed === 'true' && adId == currentAdId) {
                 // Acreditar ganancias y actualizar el balance
-                balance += parseFloat(currentEarnings);
+                balance += parseFloat(earnings);
                 localStorage.setItem('balance', balance);
                 document.getElementById("balance").innerText = balance.toFixed(2);
                 // Cambiar el texto del botón a "Claim $X"
-                document.getElementById(`ad-button-${adId}`).innerText = `Claim $${currentEarnings}`;
-                // Limpiar el token y adId
-                localStorage.removeItem('token'); 
-                currentAdId = null; 
+                document.getElementById(`ad-button-${adId}`).innerText = `Claim $${earnings}`;
+                currentAdId = null; // Reiniciar el ID del anuncio actual
             } else {
-                console.log("Invalid token or no earnings to credit.");
+                console.log("Ad not completed or invalid parameters.");
             }
         }
 
@@ -249,6 +239,7 @@
     </script>
 </body>
 </html>
+
 
 
 
