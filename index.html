@@ -194,66 +194,58 @@
         <div class="ad-grid">
             <section class="ad-section">
                 <h2 id="ad-title-1">Ad 1</h2>
-                <a href="https://linkler.site/2CE2I" onclick="startAd(1); return false;">
+                <a href="javascript:void(0);" onclick="startAd(1);">
                     <button class="ad-button">Click on Ad 1</button>
                 </a>
-                <p id="timer-1" class="timer"></p>
             </section>
 
             <section class="ad-section">
                 <h2 id="ad-title-2">Ad 2</h2>
-                <a href="https://linkler.site/2CE2I" onclick="startAd(2); return false;">
+                <a href="javascript:void(0);" onclick="startAd(2);">
                     <button class="ad-button">Click on Ad 2</button>
                 </a>
-                <p id="timer-2" class="timer"></p>
             </section>
 
             <section class="ad-section">
                 <h2 id="ad-title-3">Ad 3</h2>
-                <a href="https://linkler.site/2CE2I" onclick="startAd(3); return false;">
+                <a href="javascript:void(0);" onclick="startAd(3);">
                     <button class="ad-button">Click on Ad 3</button>
                 </a>
-                <p id="timer-3" class="timer"></p>
             </section>
 
             <section class="ad-section">
                 <h2 id="ad-title-4">Ad 4</h2>
-                <a href="https://linkler.site/2CE2I" onclick="startAd(4); return false;">
+                <a href="javascript:void(0);" onclick="startAd(4);">
                     <button class="ad-button">Click on Ad 4</button>
                 </a>
-                <p id="timer-4" class="timer"></p>
             </section>
 
             <section class="ad-section">
                 <h2 id="ad-title-5">Ad 5</h2>
-                <a href="https://linkler.site/2CE2I" onclick="startAd(5); return false;">
+                <a href="javascript:void(0);" onclick="startAd(5);">
                     <button class="ad-button">Click on Ad 5</button>
                 </a>
-                <p id="timer-5" class="timer"></p>
             </section>
 
             <section class="ad-section">
                 <h2 id="ad-title-6">Ad 6</h2>
-                <a href="https://linkler.site/2CE2I" onclick="startAd(6); return false;">
+                <a href="javascript:void(0);" onclick="startAd(6);">
                     <button class="ad-button">Click on Ad 6</button>
                 </a>
-                <p id="timer-6" class="timer"></p>
             </section>
 
             <section class="ad-section">
                 <h2 id="ad-title-7">Ad 7</h2>
-                <a href="https://linkler.site/2CE2I" onclick="startAd(7); return false;">
+                <a href="javascript:void(0);" onclick="startAd(7);">
                     <button class="ad-button">Click on Ad 7</button>
                 </a>
-                <p id="timer-7" class="timer"></p>
             </section>
 
             <section class="ad-section">
                 <h2 id="ad-title-8">Ad 8</h2>
-                <a href="https://linkler.site/2CE2I" onclick="startAd(8); return false;">
+                <a href="javascript:void(0);" onclick="startAd(8);">
                     <button class="ad-button">Click on Ad 8</button>
                 </a>
-                <p id="timer-8" class="timer"></p>
             </section>
         </div>
 
@@ -288,9 +280,10 @@
         const urlParams = new URLSearchParams(window.location.search);
         const earnedFromAd = urlParams.get('earned');
 
+        // Update balance if ad earnings are present
         if (earnedFromAd) {
             const earnedAmount = parseFloat(earnedFromAd);
-            balance += earnedAmount; // Update balance if ad earnings are present
+            balance += earnedAmount; // Update balance
             localStorage.setItem("balance", balance); // Store updated balance
         }
 
@@ -308,15 +301,6 @@
             window.open(ad.link + '?earned=' + ad.earnings, "_self"); // Add earnings to the URL
         }
 
-        function updateBalance(adIndex) {
-            const ad = ads[adIndex - 1];
-            balance += ad.earnings;
-            localStorage.setItem("balance", balance); // Store updated balance
-            document.getElementById("balance").textContent = balance.toFixed(2);
-            document.getElementById("withdraw-button").disabled = balance < 20; // Update withdraw button state
-            document.getElementById("message").textContent = `You earned $${ad.earnings.toFixed(2)}!`;
-        }
-
         function claimBonus() {
             if (!bonusClaimed) {
                 balance += 1.00;
@@ -329,17 +313,22 @@
             }
         }
 
+        // Close modal when clicking on 'X'
         document.getElementById("close-modal").onclick = function() {
             document.getElementById("bonus-modal").style.display = "none";
         }
 
+        // Close modal when clicking outside of it
         window.onclick = function(event) {
             if (event.target == document.getElementById("bonus-modal")) {
                 document.getElementById("bonus-modal").style.display = "none";
             }
         }
 
+        // Update balance display on window load
         window.onload = function() {
+            // Update balance display
+            document.getElementById("balance").textContent = balance.toFixed(2);
             // Check if the modal should be shown on load
             if (!bonusClaimed) {
                 document.getElementById("bonus-modal").style.display = "block"; // Show modal if bonus not claimed
@@ -348,3 +337,5 @@
     </script>
 </body>
 </html>
+
+
