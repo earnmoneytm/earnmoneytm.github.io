@@ -210,15 +210,16 @@
             const adId = urlParams.get('adId');
 
             // Verificar si el token es válido
-            if (tokenFromUrl === token && adId === currentAdId) {
+            if (tokenFromUrl === token && adId == currentAdId) {
                 // Acreditar ganancias y actualizar el balance
                 balance += parseFloat(currentEarnings);
                 localStorage.setItem('balance', balance);
                 document.getElementById("balance").innerText = balance.toFixed(2);
                 // Cambiar el texto del botón a "Claim $X"
                 document.getElementById(`ad-button-${adId}`).innerText = `Claim $${currentEarnings}`;
-                localStorage.removeItem('token'); // Limpieza del token
-                localStorage.removeItem('currentAdId'); // Limpieza del adId
+                // Limpiar el token y adId
+                localStorage.removeItem('token'); 
+                currentAdId = null; 
             } else {
                 console.log("Invalid token or no earnings to credit.");
             }
@@ -248,6 +249,8 @@
     </script>
 </body>
 </html>
+
+
 
 
 
