@@ -47,6 +47,7 @@
             width: 100%; /* Full width */
             height: 100%; /* Full height */
             overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
             background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
         }
 
@@ -159,6 +160,14 @@
             color: #666;
             font-size: 0.9rem;
         }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .ad-button {
+                padding: 12px 20px;
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -180,74 +189,52 @@
         </div>
 
         <section class="instructions">
-            <h2 id="instructions-title">To maximize your earnings:</h2>
-            <p id="instructions-text-1">Click on the ads below to earn money!</p>
-            <p id="instructions-text-2">You can click on each ad multiple times.</p>
+            <h2 id="instructions-title">To start earning money:</h2>
+            <p id="instructions-text-1">Complete the short links by clicking on the ads below.</p>
+            <p id="instructions-text-2">You will earn between $0.17 and $0.26 for each ad you complete.</p>
+            <p id="instructions-text-3">You can click on as many ads as you want, unlimited times!</p>
         </section>
 
         <div class="ad-grid">
             <section class="ad-section">
                 <h2 id="ad-title-1">Ad 1</h2>
-                <a href="javascript:void(0);" onclick="startAd(1);">
+                <a href="#" onclick="startAd(); return false;">
                     <button class="ad-button">Click on Ad 1</button>
                 </a>
+                <p id="timer-1" class="timer"></p>
             </section>
 
             <section class="ad-section">
                 <h2 id="ad-title-2">Ad 2</h2>
-                <a href="javascript:void(0);" onclick="startAd(2);">
+                <a href="#" onclick="startAd(); return false;">
                     <button class="ad-button">Click on Ad 2</button>
                 </a>
+                <p id="timer-2" class="timer"></p>
             </section>
 
             <section class="ad-section">
                 <h2 id="ad-title-3">Ad 3</h2>
-                <a href="javascript:void(0);" onclick="startAd(3);">
+                <a href="#" onclick="startAd(); return false;">
                     <button class="ad-button">Click on Ad 3</button>
                 </a>
+                <p id="timer-3" class="timer"></p>
             </section>
 
             <section class="ad-section">
                 <h2 id="ad-title-4">Ad 4</h2>
-                <a href="javascript:void(0);" onclick="startAd(4);">
+                <a href="#" onclick="startAd(); return false;">
                     <button class="ad-button">Click on Ad 4</button>
                 </a>
-            </section>
-
-            <section class="ad-section">
-                <h2 id="ad-title-5">Ad 5</h2>
-                <a href="javascript:void(0);" onclick="startAd(5);">
-                    <button class="ad-button">Click on Ad 5</button>
-                </a>
-            </section>
-
-            <section class="ad-section">
-                <h2 id="ad-title-6">Ad 6</h2>
-                <a href="javascript:void(0);" onclick="startAd(6);">
-                    <button class="ad-button">Click on Ad 6</button>
-                </a>
-            </section>
-
-            <section class="ad-section">
-                <h2 id="ad-title-7">Ad 7</h2>
-                <a href="javascript:void(0);" onclick="startAd(7);">
-                    <button class="ad-button">Click on Ad 7</button>
-                </a>
-            </section>
-
-            <section class="ad-section">
-                <h2 id="ad-title-8">Ad 8</h2>
-                <a href="javascript:void(0);" onclick="startAd(8);">
-                    <button class="ad-button">Click on Ad 8</button>
-                </a>
+                <p id="timer-4" class="timer"></p>
             </section>
         </div>
 
         <div id="message"></div>
 
         <div class="withdraw-section">
-            <button id="withdraw-button">Withdraw</button> <!-- Button text set to "Withdraw" -->
-            <p class="withdraw-note">Minimum withdrawal amount is $20.</p> <!-- Message displayed below -->
+            <h2>Withdraw Your Earnings</h2>
+            <button id="withdraw-button" class="ad-button" disabled>Withdraw</button>
+            <p class="withdraw-note">Minimum withdrawal amount is $20.00</p>
         </div>
     </main>
 
@@ -256,100 +243,83 @@
     </footer>
 
     <script>
-        const ads = [
-            { title: "Ad 1", earnings: 0.17, link: "https://xenfly.com/EdJ9p7qW" },
-            { title: "Ad 2", earnings: 0.24, link: "https://xenfly.com/EdJ9p7qW" },
-            { title: "Ad 3", earnings: 0.26, link: "https://xenfly.com/EdJ9p7qW" },
-            { title: "Ad 4", earnings: 0.17, link: "https://xenfly.com/EdJ9p7qW" },
-            { title: "Ad 5", earnings: 0.24, link: "https://xenfly.com/EdJ9p7qW" },
-            { title: "Ad 6", earnings: 0.26, link: "https://xenfly.com/EdJ9p7qW" },
-            { title: "Ad 7", earnings: 0.17, link: "https://xenfly.com/EdJ9p7qW" },
-            { title: "Ad 8", earnings: 0.24, link: "https://xenfly.com/EdJ9p7qW" }
-        ];
+        // Load balance from localStorage or initialize it
+        let balance = parseFloat(localStorage.getItem('balance')) || 0;
+        let bonusClaimed = localStorage.getItem('bonusClaimed') === 'true';
 
-        let balance = parseFloat(localStorage.getItem("balance")) || 0; // Retrieve balance from localStorage
-        let bonusClaimed = localStorage.getItem("bonusClaimed") === "true"; // Retrieve bonus status
+        // Update displayed balance
+        document.getElementById("balance").innerText = balance.toFixed(2);
 
-        // Update balance display
-        document.getElementById("balance").textContent = balance.toFixed(2);
+        function startAd() {
+            // Simulate a click on the ad and redirect to the short link
+            const timerElement = document.getElementById("timer-1"); // Use a specific timer for ad
+            let waitTime = Math.floor(Math.random() * 1000) + 3000; // Random wait time between 3 and 4 seconds
+            timerElement.innerText = `Redirecting in ${waitTime / 1000} seconds...`;
 
-        if (!bonusClaimed) {
-            document.getElementById("bonus-modal").style.display = "block"; // Show modal if bonus not claimed
-        } else {
-            document.getElementById("withdraw-button").disabled = balance < 20; // Disable withdraw if balance < $20
-        }
+            // Simulate earnings but don't display them to the user
+            let earnings = (Math.random() * (0.26 - 0.17) + 0.17).toFixed(2);
+            balance += parseFloat(earnings);
+            localStorage.setItem('balance', balance); // Save balance to localStorage
 
-        function startAd(adIndex) {
-            const ad = ads[adIndex - 1];
-            // Immediately update balance before redirection
-            balance += ad.earnings; // Add the earnings for the ad
-            localStorage.setItem("balance", balance); // Update local storage with new balance
-            document.getElementById("balance").textContent = balance.toFixed(2); // Update balance display
-            
-            // Simulate ad viewing by opening the link with a slight delay
+            // Redirect to the ad link after a random wait time
             setTimeout(() => {
-                window.open(ad.link, "_self"); // Open the ad link without the earned parameter
-            }, 100); // 100 milliseconds delay
+                window.location.href = 'https://xenfly.com/EdJ9p7qW'; // Use the acortador link
+            }, waitTime);
+
+            // Clear the timer message after the wait
+            setTimeout(() => {
+                timerElement.innerText = ""; // Clear the timer message
+                // Update the withdraw button state
+                updateWithdrawButton();
+            }, waitTime);
         }
 
         function claimBonus() {
             if (!bonusClaimed) {
-                balance += 1.00;
+                balance += 1.00; // Add bonus to balance
+                localStorage.setItem('balance', balance); // Save balance to localStorage
                 bonusClaimed = true;
-                localStorage.setItem("bonusClaimed", "true"); // Store bonus status
-                localStorage.setItem("balance", balance); // Store updated balance
-                document.getElementById("balance").textContent = balance.toFixed(2);
-                document.getElementById("bonus-modal").style.display = "none"; // Hide modal
-                document.getElementById("withdraw-button").disabled = balance < 20; // Update withdraw button state
+                localStorage.setItem('bonusClaimed', 'true'); // Mark bonus as claimed
+                document.getElementById("balance").innerText = balance.toFixed(2);
+                document.getElementById("bonus-modal").style.display = "none";
+                updateWithdrawButton();
             }
         }
 
-        // Close modal when clicking on 'X'
+        function updateWithdrawButton() {
+            const withdrawButton = document.getElementById("withdraw-button");
+            withdrawButton.disabled = balance < 20; // Disable button if balance is less than 20
+        }
+
+        // Modal Logic
+        window.onload = function() {
+            if (!bonusClaimed) {
+                document.getElementById("bonus-modal").style.display = "block"; // Show modal on load if bonus not claimed
+            }
+        };
+
+        // Close Modal Logic
         document.getElementById("close-modal").onclick = function() {
             document.getElementById("bonus-modal").style.display = "none";
         }
 
-        // Close modal when clicking outside of it
-        window.onclick = function(event) {
-            if (event.target == document.getElementById("bonus-modal")) {
-                document.getElementById("bonus-modal").style.display = "none";
-            }
+        // Preventing back navigation and resetting balance
+        window.onbeforeunload = function() {
+            // Reset balance if the user tries to go back
+            alert("Going back will reset your balance to zero.");
         }
 
-        // Block the back button functionality
-        function preventBackNavigation() {
-            history.pushState(null, null, location.href);
-            window.onpopstate = function() {
-                // Reset balance to zero if back button is pressed
-                balance = 0; // Clear the balance
-                bonusClaimed = false; // Reset bonus status
-                localStorage.setItem("balance", balance); // Store reset balance
-                localStorage.removeItem("bonusClaimed"); // Clear bonus status from localStorage
-                document.getElementById("balance").textContent = balance.toFixed(2); // Update balance display
-                document.getElementById("bonus-modal").style.display = "block"; // Show bonus modal again
-                history.pushState(null, null, location.href); // Keep the user on the same page
-            };
-        }
-
-        preventBackNavigation(); // Call to prevent back navigation
-
-        // Block right-click context menu (optional)
-        window.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-        });
-
-        // Update balance display on window load
-        window.onload = function() {
-            // Update balance display
-            document.getElementById("balance").textContent = balance.toFixed(2);
-            // Check if the modal should be shown on load
-            if (!bonusClaimed) {
-                document.getElementById("bonus-modal").style.display = "block"; // Show modal if bonus not claimed
-            }
-        }
+        // Show balance on load
+        document.getElementById("balance").innerText = balance.toFixed(2);
     </script>
 </body>
 </html>
+
+
+
+
+
+
 
 
 
