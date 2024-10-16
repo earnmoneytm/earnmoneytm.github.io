@@ -205,14 +205,17 @@
 
             // Si el token coincide, acreditamos el saldo
             if (returnedToken && returnedToken === storedToken) {
+                // Generar un monto aleatorio entre 0.17 y 0.26
                 let earnings = (Math.random() * (0.26 - 0.17) + 0.17).toFixed(2);
                 balance += parseFloat(earnings);
                 localStorage.setItem('balance', balance.toFixed(2));
                 document.getElementById("balance").innerText = balance.toFixed(2);
                 document.getElementById("message").innerText = `You earned $${earnings}!`;
-                
+
                 // Limpiar el token para evitar usos posteriores
                 localStorage.removeItem('token');
+            } else {
+                document.getElementById("message").innerText = "No earnings credited. Please ensure you completed the ad.";
             }
 
             updateWithdrawButton();
@@ -226,6 +229,7 @@
     </script>
 </body>
 </html>
+
 
 
 
