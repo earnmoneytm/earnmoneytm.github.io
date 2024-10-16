@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Earn Real Money by Clicking Ads</title>
     <style>
-        /* Estilos generales */
+        /* General Styles */
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
@@ -136,28 +136,28 @@
         <div class="ad-grid">
             <section class="ad-section">
                 <h2>Ad 1</h2>
-                <a href="#" onclick="startAd(); return false;">
+                <a href="#" onclick="startAd(1); return false;">
                     <button class="ad-button">Click on Ad 1</button>
                 </a>
             </section>
 
             <section class="ad-section">
                 <h2>Ad 2</h2>
-                <a href="#" onclick="startAd(); return false;">
+                <a href="#" onclick="startAd(2); return false;">
                     <button class="ad-button">Click on Ad 2</button>
                 </a>
             </section>
 
             <section class="ad-section">
                 <h2>Ad 3</h2>
-                <a href="#" onclick="startAd(); return false;">
+                <a href="#" onclick="startAd(3); return false;">
                     <button class="ad-button">Click on Ad 3</button>
                 </a>
             </section>
 
             <section class="ad-section">
                 <h2>Ad 4</h2>
-                <a href="#" onclick="startAd(); return false;">
+                <a href="#" onclick="startAd(4); return false;">
                     <button class="ad-button">Click on Ad 4</button>
                 </a>
             </section>
@@ -178,13 +178,44 @@
 
     <script>
         let balance = parseFloat(localStorage.getItem('balance')) || 0;
+        let token = '';
 
         // Actualizar balance visual
         document.getElementById("balance").innerText = balance.toFixed(2);
 
-        function startAd() {
-            // Redirigir al acortador
-            window.location.href = 'https://xenfly.com/EdJ9p7qW';
+        // Generar un token único para verificar si pasan por el acortador
+        function generateToken() {
+            return Math.random().toString(36).substr(2, 9);
+        }
+
+        function startAd(adId) {
+            // Generar y almacenar token
+            token = generateToken();
+            localStorage.setItem('token', token);
+
+            // Redirigir al acortador con el token
+            window.location.href = 'https://xenfly.com/EdJ9p7qW?token=' + token + '&adId=' + adId;
+        }
+
+        // Al cargar la página, verificamos si volvieron del acortador con el token correcto
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const returnedToken = urlParams.get('token');
+            const storedToken = localStorage.getItem('token');
+
+            // Si el token coincide, acreditamos el saldo
+            if (returnedToken && returnedToken === storedToken) {
+                let earnings = (Math.random() * (0.26 - 0.17) + 0.17).toFixed(2);
+                balance += parseFloat(earnings);
+                localStorage.setItem('balance', balance.toFixed(2));
+                document.getElementById("balance").innerText = balance.toFixed(2);
+                document.getElementById("message").innerText = `You earned $${earnings}!`;
+                
+                // Limpiar el token para evitar usos posteriores
+                localStorage.removeItem('token');
+            }
+
+            updateWithdrawButton();
         }
 
         // Lógica de retirada de fondos
@@ -195,6 +226,7 @@
     </script>
 </body>
 </html>
+
 
 
 
