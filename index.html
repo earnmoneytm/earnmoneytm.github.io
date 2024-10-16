@@ -37,18 +37,6 @@
             font-weight: bold;
         }
 
-        /* Language Selector */
-        .language-selector {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            background-color: white;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 5px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
         /* Modal Styles */
         .modal {
             display: none; /* Hidden by default */
@@ -59,7 +47,6 @@
             width: 100%; /* Full width */
             height: 100%; /* Full height */
             overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
             background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
         }
 
@@ -178,14 +165,6 @@
             color: #666;
             font-size: 0.9rem;
         }
-
-        /* Responsive Design */
-        @media (max-width: 600px) {
-            .ad-button {
-                padding: 12px 20px;
-                font-size: 1rem;
-            }
-        }
     </style>
 </head>
 <body>
@@ -193,35 +172,6 @@
         <h1 id="header-title">Earn Money by Clicking Ads</h1>
         <div id="balance-display">
             Balance: $<span id="balance">0.00</span>
-        </div>
-        <div class="language-selector">
-            <label for="language">Language:</label>
-            <select id="language" onchange="changeLanguage()">
-                <option value="en">English</option>
-                <option value="es">Español</option>
-                <option value="fr">Français</option>
-                <option value="de">Deutsch</option>
-                <option value="it">Italiano</option>
-                <option value="pt">Português</option>
-                <option value="ru">Русский</option>
-                <option value="uk">Українська</option>
-                <option value="pl">Polski</option>
-                <option value="ro">Română</option>
-                <option value="cs">Čeština</option>
-                <option value="hu">Magyar</option>
-                <option value="sk">Slovenčina</option>
-                <option value="bg">Български</option>
-                <option value="el">Ελληνικά</option>
-                <option value="hr">Hrvatski</option>
-                <option value="lt">Lietuvių</option>
-                <option value="lv">Latviešu</option>
-                <option value="sl">Slovenščina</option>
-                <option value="ba">Босански</option>
-                <option value="mk">Македонски</option>
-                <option value="sr">Српски</option>
-                <option value="sq">Shqip</option>
-                <option value="tr">Türkçe</option>
-            </select>
         </div>
     </header>
 
@@ -237,9 +187,8 @@
 
         <section class="instructions">
             <h2 id="instructions-title">To maximize your earnings:</h2>
-            <p id="instructions-text-1">Click on the ads below and keep them open for at least 30 seconds.</p>
-            <p id="instructions-text-2">If you navigate the ad page or register, you can earn up to $0.24!</p>
-            <p id="instructions-text-3">You can click on each ad multiple times.</p>
+            <p id="instructions-text-1">Click on the ads below to earn money!</p>
+            <p id="instructions-text-2">You can click on each ad multiple times.</p>
         </section>
 
         <div class="ad-grid">
@@ -308,111 +257,107 @@
             </section>
         </div>
 
-        <div class="withdraw-section">
-            <button id="withdraw-button" disabled>Withdraw</button>
-            <p class="withdraw-note">Minimum withdrawal amount: $20.00</p>
-        </div>
+        <div id="message"></div>
 
-        <p id="message"></p>
+        <div class="withdraw-section">
+            <button id="withdraw-button" disabled>Withdraw $1.00</button>
+            <p class="withdraw-note">Minimum balance to withdraw: $20.00</p>
+        </div>
     </main>
 
     <footer>
-        <p>&copy; 2024 Earn Money by Clicking Ads. All rights reserved.</p>
+        <p>© 2024 Your Company Name. All rights reserved.</p>
     </footer>
 
     <script>
-        // Initial balance
-        let balance = 0.00;
-        let adTimers = {};
-        let adClicks = {}; // Track clicks for each ad
+        const ads = [
+            { title: "Ad 1", earnings: 0.17, link: "https://linkler.site/2CE2I" },
+            { title: "Ad 2", earnings: 0.24, link: "https://linkler.site/2CE2I" },
+            { title: "Ad 3", earnings: 0.26, link: "https://linkler.site/2CE2I" },
+            { title: "Ad 4", earnings: 0.17, link: "https://linkler.site/2CE2I" },
+            { title: "Ad 5", earnings: 0.24, link: "https://linkler.site/2CE2I" },
+            { title: "Ad 6", earnings: 0.26, link: "https://linkler.site/2CE2I" },
+            { title: "Ad 7", earnings: 0.17, link: "https://linkler.site/2CE2I" },
+            { title: "Ad 8", earnings: 0.24, link: "https://linkler.site/2CE2I" }
+        ];
 
-        // Show the modal on page load
-        window.onload = function() {
-            document.getElementById('bonus-modal').style.display = 'block';
-        };
+        let balance = parseFloat(localStorage.getItem("balance")) || 0; // Retrieve balance from localStorage
+        let bonusClaimed = localStorage.getItem("bonusClaimed") === "true"; // Retrieve bonus status
 
-        // Function to close the modal
-        document.getElementById('close-modal').onclick = function() {
-            document.getElementById('bonus-modal').style.display = 'none';
-        };
+        document.getElementById("balance").textContent = balance.toFixed(2);
+        
+        if (!bonusClaimed) {
+            document.getElementById("bonus-modal").style.display = "block"; // Show modal if bonus not claimed
+        } else {
+            document.getElementById("withdraw-button").disabled = balance < 20; // Disable withdraw if balance < $20
+        }
 
-        // Function to claim the bonus
+        function startAd(adIndex) {
+            const ad = ads[adIndex - 1];
+            // Simulate ad viewing by opening the link
+            window.open(ad.link, "_self");
+            setTimeout(() => {
+                updateBalance(adIndex);
+            }, 5000); // Simulate a delay for ad viewing
+        }
+
+        function updateBalance(adIndex) {
+            const ad = ads[adIndex - 1];
+            balance += ad.earnings;
+            localStorage.setItem("balance", balance); // Store updated balance
+            document.getElementById("balance").textContent = balance.toFixed(2);
+            document.getElementById("withdraw-button").disabled = balance < 20; // Update withdraw button state
+            document.getElementById("message").textContent = `You earned $${ad.earnings.toFixed(2)}!`;
+        }
+
         function claimBonus() {
-            balance += 1.00;
-            document.getElementById('balance').innerText = balance.toFixed(2);
-            document.getElementById('bonus-modal').style.display = 'none';
-        }
-
-        // Function to start the ad and timer
-        function startAd(adNumber) {
-            // Stop any previously running timer
-            clearInterval(adTimers[adNumber]);
-
-            // Reset ad clicks tracking for this ad
-            adClicks[adNumber] = { clicked: false, timeLeft: 30 };
-
-            let timerDisplay = document.getElementById(`timer-${adNumber}`);
-            timerDisplay.innerText = `Time left: 30 seconds`;
-
-            // Function to handle the countdown
-            const countdown = () => {
-                if (adClicks[adNumber].timeLeft <= 0) {
-                    clearInterval(adTimers[adNumber]);
-                    document.getElementById('message').innerText = `You earned $0.24 for Ad ${adNumber}!`;
-                    balance += 0.24;
-                    document.getElementById('balance').innerText = balance.toFixed(2);
-                    updateWithdrawButton();
-                    return; // Exit function when done
-                }
-
-                adClicks[adNumber].timeLeft -= 1;
-                timerDisplay.innerText = `Time left: ${adClicks[adNumber].timeLeft} seconds`;
-            };
-
-            // Start the timer
-            adTimers[adNumber] = setInterval(countdown, 1000);
-
-            // Open the ad link in a new tab/window
-            const adWindow = window.open(`https://www.cpmrevenuegate.com/yqaef35tiq?key=387432c1d8fb0a02d4cd38bfbc560df3`, '_blank');
-
-            // Add event listener for when the ad window is closed
-            const checkAdWindowClosed = setInterval(() => {
-                if (adWindow.closed) {
-                    clearInterval(adTimers[adNumber]); // Stop the timer
-                    alert('You closed the ad before 30 seconds. Please click the ad again to restart the timer.');
-                    timerDisplay.innerText = ""; // Clear timer display
-                    adClicks[adNumber].clicked = false; // Reset click state
-                    clearInterval(checkAdWindowClosed); // Stop checking for closure
-                }
-            }, 1000);
-        }
-
-        // Function to update the withdraw button based on balance
-        function updateWithdrawButton() {
-            let withdrawButton = document.getElementById('withdraw-button');
-            if (balance >= 20.00) {
-                withdrawButton.disabled = false; // Enable the button
+            if (!bonusClaimed) {
+                balance += 1.00;
+                bonusClaimed = true;
+                localStorage.setItem("bonusClaimed", "true"); // Store bonus status
+                localStorage.setItem("balance", balance); // Store updated balance
+                document.getElementById("balance").textContent = balance.toFixed(2);
+                document.getElementById("bonus-modal").style.display = "none"; // Hide modal
+                document.getElementById("withdraw-button").disabled = balance < 20; // Update withdraw button state
             }
         }
 
-        // Function for withdrawal
-        document.getElementById('withdraw-button').onclick = function() {
-            if (balance >= 20.00) {
-                balance = 0.00; // Reset balance after withdrawal
-                document.getElementById('balance').innerText = balance.toFixed(2);
-                alert('Withdrawal successful!');
-                this.disabled = true; // Disable the button after withdrawal
-            } else {
-                alert('You must have at least $20.00 to withdraw.');
-            }
-        };
+        document.getElementById("close-modal").onclick = function() {
+            document.getElementById("bonus-modal").style.display = "none";
+        }
 
-        // Change language function (placeholder)
-        function changeLanguage() {
-            // Implement language change functionality here
+        window.onclick = function(event) {
+            if (event.target == document.getElementById("bonus-modal")) {
+                document.getElementById("bonus-modal").style.display = "none";
+            }
+        }
+
+        window.onload = function() {
+            // Check if the modal should be shown on load
+            if (!bonusClaimed) {
+                document.getElementById("bonus-modal").style.display = "block"; // Show modal if bonus not claimed
+            }
         }
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
