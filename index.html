@@ -149,12 +149,6 @@
             pointer-events: auto; /* Enable interaction */
         }
 
-        .withdraw-note {
-            font-size: 1rem;
-            color: #666;
-            margin-top: 10px;
-        }
-
         /* Footer */
         footer {
             margin-top: 40px;
@@ -252,26 +246,25 @@
         <div id="message"></div>
 
         <div class="withdraw-section">
-            <button id="withdraw-button" disabled>Withdraw $1.00</button>
-            <p class="withdraw-note">Minimum withdrawal amount is $20.</p>
+            <button id="withdraw-button">Withdraw</button> <!-- Button text set to "Withdraw" -->
+            <p class="withdraw-note">Minimum withdrawal amount is $20.</p> <!-- Message displayed below -->
         </div>
     </main>
 
     <footer>
-        <p>&copy; 2024 Earn Money Website. All Rights Reserved.</p>
+        <p>&copy; 2024 Your Company. All rights reserved.</p>
     </footer>
 
     <script>
-        // Ad data with earnings
         const ads = [
-            { title: "Ad 1", earnings: 0.17, link: "https://linkler.site/2CE2I" },
-            { title: "Ad 2", earnings: 0.24, link: "https://linkler.site/2CE2I" },
-            { title: "Ad 3", earnings: 0.26, link: "https://linkler.site/2CE2I" },
-            { title: "Ad 4", earnings: 0.17, link: "https://linkler.site/2CE2I" },
-            { title: "Ad 5", earnings: 0.24, link: "https://linkler.site/2CE2I" },
-            { title: "Ad 6", earnings: 0.26, link: "https://linkler.site/2CE2I" },
-            { title: "Ad 7", earnings: 0.17, link: "https://linkler.site/2CE2I" },
-            { title: "Ad 8", earnings: 0.24, link: "https://linkler.site/2CE2I" }
+            { title: "Ad 1", earnings: 0.17, link: "https://ouo.io/2NvPtou" },
+            { title: "Ad 2", earnings: 0.24, link: "https://ouo.io/2NvPtou" },
+            { title: "Ad 3", earnings: 0.26, link: "https://ouo.io/2NvPtou" },
+            { title: "Ad 4", earnings: 0.17, link: "https://ouo.io/2NvPtou" },
+            { title: "Ad 5", earnings: 0.24, link: "https://ouo.io/2NvPtou" },
+            { title: "Ad 6", earnings: 0.26, link: "https://ouo.io/2NvPtou" },
+            { title: "Ad 7", earnings: 0.17, link: "https://ouo.io/2NvPtou" },
+            { title: "Ad 8", earnings: 0.24, link: "https://ouo.io/2NvPtou" }
         ];
 
         let balance = parseFloat(localStorage.getItem("balance")) || 0; // Retrieve balance from localStorage
@@ -333,6 +326,25 @@
             }
         }
 
+        // Block the back button functionality
+        function preventBackNavigation() {
+            history.pushState(null, null, location.href);
+            window.onpopstate = function() {
+                // Reset balance to zero if back button is pressed
+                balance = 0; // Clear the balance
+                localStorage.setItem("balance", balance); // Store reset balance
+                document.getElementById("balance").textContent = balance.toFixed(2); // Update balance display
+                history.pushState(null, null, location.href); // Keep the user on the same page
+            };
+        }
+
+        preventBackNavigation(); // Call to prevent back navigation
+
+        // Block right-click context menu (optional)
+        window.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
         // Update balance display on window load
         window.onload = function() {
             // Update balance display
@@ -345,6 +357,11 @@
     </script>
 </body>
 </html>
+
+
+
+
+
 
 
 
