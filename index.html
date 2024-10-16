@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Earn Real Money by Clicking Ads</title>
     <style>
-        /* General Styles */
+        /* Estilos generales */
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
@@ -203,6 +203,10 @@
             const returnedToken = urlParams.get('token');
             const storedToken = localStorage.getItem('token');
 
+            // Depuración
+            console.log("Returned Token:", returnedToken);
+            console.log("Stored Token:", storedToken);
+
             // Si el token coincide, acreditamos el saldo
             if (returnedToken && returnedToken === storedToken) {
                 // Generar un monto aleatorio entre 0.17 y 0.26
@@ -218,6 +222,7 @@
                 document.getElementById("message").innerText = "No earnings credited. Please ensure you completed the ad.";
             }
 
+            // Actualizar botón de retirada
             updateWithdrawButton();
         }
 
