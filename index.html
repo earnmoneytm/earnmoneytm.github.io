@@ -257,32 +257,22 @@
 
     <script>
         const ads = [
-            { title: "Ad 1", earnings: 0.17, link: "https://ouo.io/2NvPtou" },
-            { title: "Ad 2", earnings: 0.24, link: "https://ouo.io/2NvPtou" },
-            { title: "Ad 3", earnings: 0.26, link: "https://ouo.io/2NvPtou" },
-            { title: "Ad 4", earnings: 0.17, link: "https://ouo.io/2NvPtou" },
-            { title: "Ad 5", earnings: 0.24, link: "https://ouo.io/2NvPtou" },
-            { title: "Ad 6", earnings: 0.26, link: "https://ouo.io/2NvPtou" },
-            { title: "Ad 7", earnings: 0.17, link: "https://ouo.io/2NvPtou" },
-            { title: "Ad 8", earnings: 0.24, link: "https://ouo.io/2NvPtou" }
+            { title: "Ad 1", earnings: 0.17, link: "https://xenfly.com/EdJ9p7qW" },
+            { title: "Ad 2", earnings: 0.24, link: "https://xenfly.com/EdJ9p7qW" },
+            { title: "Ad 3", earnings: 0.26, link: "https://xenfly.com/EdJ9p7qW" },
+            { title: "Ad 4", earnings: 0.17, link: "https://xenfly.com/EdJ9p7qW" },
+            { title: "Ad 5", earnings: 0.24, link: "https://xenfly.com/EdJ9p7qW" },
+            { title: "Ad 6", earnings: 0.26, link: "https://xenfly.com/EdJ9p7qW" },
+            { title: "Ad 7", earnings: 0.17, link: "https://xenfly.com/EdJ9p7qW" },
+            { title: "Ad 8", earnings: 0.24, link: "https://xenfly.com/EdJ9p7qW" }
         ];
 
         let balance = parseFloat(localStorage.getItem("balance")) || 0; // Retrieve balance from localStorage
         let bonusClaimed = localStorage.getItem("bonusClaimed") === "true"; // Retrieve bonus status
 
-        // Check if the URL has a query parameter to indicate earnings
-        const urlParams = new URLSearchParams(window.location.search);
-        const earnedFromAd = urlParams.get('earned');
-
-        // Update balance if ad earnings are present
-        if (earnedFromAd) {
-            const earnedAmount = parseFloat(earnedFromAd);
-            balance += earnedAmount; // Update balance
-            localStorage.setItem("balance", balance); // Store updated balance
-        }
-
+        // Update balance display
         document.getElementById("balance").textContent = balance.toFixed(2);
-        
+
         if (!bonusClaimed) {
             document.getElementById("bonus-modal").style.display = "block"; // Show modal if bonus not claimed
         } else {
@@ -298,7 +288,7 @@
             
             // Simulate ad viewing by opening the link with a slight delay
             setTimeout(() => {
-                window.open(ad.link + '?earned=' + ad.earnings, "_self"); // Add earnings to the URL
+                window.open(ad.link, "_self"); // Open the ad link without the earned parameter
             }, 100); // 100 milliseconds delay
         }
 
@@ -332,8 +322,11 @@
             window.onpopstate = function() {
                 // Reset balance to zero if back button is pressed
                 balance = 0; // Clear the balance
+                bonusClaimed = false; // Reset bonus status
                 localStorage.setItem("balance", balance); // Store reset balance
+                localStorage.removeItem("bonusClaimed"); // Clear bonus status from localStorage
                 document.getElementById("balance").textContent = balance.toFixed(2); // Update balance display
+                document.getElementById("bonus-modal").style.display = "block"; // Show bonus modal again
                 history.pushState(null, null, location.href); // Keep the user on the same page
             };
         }
@@ -357,6 +350,7 @@
     </script>
 </body>
 </html>
+
 
 
 
