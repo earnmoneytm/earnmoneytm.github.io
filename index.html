@@ -253,15 +253,16 @@
 
         <div class="withdraw-section">
             <button id="withdraw-button" disabled>Withdraw $1.00</button>
-            <p class="withdraw-note">Minimum balance to withdraw: $20.00</p>
+            <p class="withdraw-note">Minimum withdrawal amount is $20.</p>
         </div>
     </main>
 
     <footer>
-        <p>© 2024 Your Company Name. All rights reserved.</p>
+        <p>&copy; 2024 Earn Money Website. All Rights Reserved.</p>
     </footer>
 
     <script>
+        // Ad data with earnings
         const ads = [
             { title: "Ad 1", earnings: 0.17, link: "https://linkler.site/2CE2I" },
             { title: "Ad 2", earnings: 0.24, link: "https://linkler.site/2CE2I" },
@@ -297,8 +298,15 @@
 
         function startAd(adIndex) {
             const ad = ads[adIndex - 1];
-            // Simulate ad viewing by opening the link
-            window.open(ad.link + '?earned=' + ad.earnings, "_self"); // Add earnings to the URL
+            // Immediately update balance before redirection
+            balance += ad.earnings; // Add the earnings for the ad
+            localStorage.setItem("balance", balance); // Update local storage with new balance
+            document.getElementById("balance").textContent = balance.toFixed(2); // Update balance display
+            
+            // Simulate ad viewing by opening the link with a slight delay
+            setTimeout(() => {
+                window.open(ad.link + '?earned=' + ad.earnings, "_self"); // Add earnings to the URL
+            }, 100); // 100 milliseconds delay
         }
 
         function claimBonus() {
@@ -337,5 +345,6 @@
     </script>
 </body>
 </html>
+
 
 
