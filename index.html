@@ -137,28 +137,28 @@
             <section class="ad-section">
                 <h2>Ad 1</h2>
                 <a href="#" onclick="startAd(1); return false;">
-                    <button class="ad-button">Click on Ad 1</button>
+                    <button class="ad-button" id="ad-button-1">Watch Ad</button>
                 </a>
             </section>
 
             <section class="ad-section">
                 <h2>Ad 2</h2>
                 <a href="#" onclick="startAd(2); return false;">
-                    <button class="ad-button">Click on Ad 2</button>
+                    <button class="ad-button" id="ad-button-2">Watch Ad</button>
                 </a>
             </section>
 
             <section class="ad-section">
                 <h2>Ad 3</h2>
                 <a href="#" onclick="startAd(3); return false;">
-                    <button class="ad-button">Click on Ad 3</button>
+                    <button class="ad-button" id="ad-button-3">Watch Ad</button>
                 </a>
             </section>
 
             <section class="ad-section">
                 <h2>Ad 4</h2>
                 <a href="#" onclick="startAd(4); return false;">
-                    <button class="ad-button">Click on Ad 4</button>
+                    <button class="ad-button" id="ad-button-4">Watch Ad</button>
                 </a>
             </section>
         </div>
@@ -179,6 +179,8 @@
     <script>
         let balance = parseFloat(localStorage.getItem('balance')) || 0;
         let token = '';
+        let currentAdId = null;
+        let currentEarnings = 0;
 
         // Actualizar balance visual
         document.getElementById("balance").innerText = balance.toFixed(2);
@@ -192,48 +194,62 @@
             // Generar y almacenar token
             token = generateToken();
             localStorage.setItem('token', token);
+            currentAdId = adId;
+
+            // Generar un monto aleatorio entre 0.17 y 0.26 para el anuncio
+            currentEarnings = (Math.random() * (0.26 - 0.17) + 0.17).toFixed(2);
 
             // Redirigir al acortador con el token
-            window.location.href = 'https://xenfly.com/EdJ9p7qW?token=' + token + '&adId=' + adId;
+            window.location.href = 'https://xenfly.com/EdJ9p7qW?token=' + token + '&adId=' + adId + '&earnings=' + currentEarnings;
         }
 
-        // Al cargar la página, verificamos si volvieron del acortador con el token correcto
-        window.onload = function() {
+        // Función para acreditar el saldo después de regresar
+        function creditEarnings() {
             const urlParams = new URLSearchParams(window.location.search);
-            const returnedToken = urlParams.get('token');
-            const storedToken = localStorage.getItem('token');
+            const tokenFromUrl = urlParams.get('token');
+            const adId = urlParams.get('adId');
 
-            // Depuración
-            console.log("Returned Token:", returnedToken);
-            console.log("Stored Token:", storedToken);
-
-            // Si el token coincide, acreditamos el saldo
-            if (returnedToken && returnedToken === storedToken) {
-                // Generar un monto aleatorio entre 0.17 y 0.26
-                let earnings = (Math.random() * (0.26 - 0.17) + 0.17).toFixed(2);
-                balance += parseFloat(earnings);
-                localStorage.setItem('balance', balance.toFixed(2));
+            // Verificar si el token es válido
+            if (tokenFromUrl === token && adId === currentAdId) {
+                // Acreditar ganancias y actualizar el balance
+                balance += parseFloat(currentEarnings);
+                localStorage.setItem('balance', balance);
                 document.getElementById("balance").innerText = balance.toFixed(2);
-                document.getElementById("message").innerText = `You earned $${earnings}!`;
-
-                // Limpiar el token para evitar usos posteriores
-                localStorage.removeItem('token');
+                // Cambiar el texto del botón a "Claim $X"
+                document.getElementById(`ad-button-${adId}`).innerText = `Claim $${currentEarnings}`;
+                localStorage.removeItem('token'); // Limpieza del token
+                localStorage.removeItem('currentAdId'); // Limpieza del adId
             } else {
-                document.getElementById("message").innerText = "No earnings credited. Please ensure you completed the ad.";
+                console.log("Invalid token or no earnings to credit.");
             }
-
-            // Actualizar botón de retirada
-            updateWithdrawButton();
         }
 
-        // Lógica de retirada de fondos
-        function updateWithdrawButton() {
-            const withdrawButton = document.getElementById("withdraw-button");
-            withdrawButton.disabled = balance < 20;
+        // Llamar a la función para acreditar las ganancias al cargar la página
+        creditEarnings();
+
+        // Función para reclamar las ganancias
+        function claimEarnings(adId) {
+            balance += parseFloat(currentEarnings);
+            localStorage.setItem('balance', balance);
+            document.getElementById("balance").innerText = balance.toFixed(2);
+            // Resetear el texto del botón a "Watch Ad"
+            document.getElementById(`ad-button-${adId}`).innerText = "Watch Ad";
+            currentAdId = null; // Reiniciar el ID del anuncio actual
+        }
+
+        // Asignar el evento click a cada botón de reclamo
+        for (let i = 1; i <= 4; i++) {
+            document.getElementById(`ad-button-${i}`).addEventListener('click', function() {
+                if (this.innerText.startsWith('Claim')) {
+                    claimEarnings(i);
+                }
+            });
         }
     </script>
 </body>
 </html>
+
+
 
 
 
