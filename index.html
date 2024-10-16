@@ -194,7 +194,7 @@
         <div class="ad-grid">
             <section class="ad-section">
                 <h2 id="ad-title-1">Ad 1</h2>
-                <a href="#" onclick="startAd(1); return false;">
+                <a href="https://linkler.site/2CE2I" onclick="startAd(1); return false;">
                     <button class="ad-button">Click on Ad 1</button>
                 </a>
                 <p id="timer-1" class="timer"></p>
@@ -202,7 +202,7 @@
 
             <section class="ad-section">
                 <h2 id="ad-title-2">Ad 2</h2>
-                <a href="#" onclick="startAd(2); return false;">
+                <a href="https://linkler.site/2CE2I" onclick="startAd(2); return false;">
                     <button class="ad-button">Click on Ad 2</button>
                 </a>
                 <p id="timer-2" class="timer"></p>
@@ -210,7 +210,7 @@
 
             <section class="ad-section">
                 <h2 id="ad-title-3">Ad 3</h2>
-                <a href="#" onclick="startAd(3); return false;">
+                <a href="https://linkler.site/2CE2I" onclick="startAd(3); return false;">
                     <button class="ad-button">Click on Ad 3</button>
                 </a>
                 <p id="timer-3" class="timer"></p>
@@ -218,7 +218,7 @@
 
             <section class="ad-section">
                 <h2 id="ad-title-4">Ad 4</h2>
-                <a href="#" onclick="startAd(4); return false;">
+                <a href="https://linkler.site/2CE2I" onclick="startAd(4); return false;">
                     <button class="ad-button">Click on Ad 4</button>
                 </a>
                 <p id="timer-4" class="timer"></p>
@@ -226,7 +226,7 @@
 
             <section class="ad-section">
                 <h2 id="ad-title-5">Ad 5</h2>
-                <a href="#" onclick="startAd(5); return false;">
+                <a href="https://linkler.site/2CE2I" onclick="startAd(5); return false;">
                     <button class="ad-button">Click on Ad 5</button>
                 </a>
                 <p id="timer-5" class="timer"></p>
@@ -234,7 +234,7 @@
 
             <section class="ad-section">
                 <h2 id="ad-title-6">Ad 6</h2>
-                <a href="#" onclick="startAd(6); return false;">
+                <a href="https://linkler.site/2CE2I" onclick="startAd(6); return false;">
                     <button class="ad-button">Click on Ad 6</button>
                 </a>
                 <p id="timer-6" class="timer"></p>
@@ -242,7 +242,7 @@
 
             <section class="ad-section">
                 <h2 id="ad-title-7">Ad 7</h2>
-                <a href="#" onclick="startAd(7); return false;">
+                <a href="https://linkler.site/2CE2I" onclick="startAd(7); return false;">
                     <button class="ad-button">Click on Ad 7</button>
                 </a>
                 <p id="timer-7" class="timer"></p>
@@ -250,7 +250,7 @@
 
             <section class="ad-section">
                 <h2 id="ad-title-8">Ad 8</h2>
-                <a href="#" onclick="startAd(8); return false;">
+                <a href="https://linkler.site/2CE2I" onclick="startAd(8); return false;">
                     <button class="ad-button">Click on Ad 8</button>
                 </a>
                 <p id="timer-8" class="timer"></p>
@@ -284,6 +284,16 @@
         let balance = parseFloat(localStorage.getItem("balance")) || 0; // Retrieve balance from localStorage
         let bonusClaimed = localStorage.getItem("bonusClaimed") === "true"; // Retrieve bonus status
 
+        // Check if the URL has a query parameter to indicate earnings
+        const urlParams = new URLSearchParams(window.location.search);
+        const earnedFromAd = urlParams.get('earned');
+
+        if (earnedFromAd) {
+            const earnedAmount = parseFloat(earnedFromAd);
+            balance += earnedAmount; // Update balance if ad earnings are present
+            localStorage.setItem("balance", balance); // Store updated balance
+        }
+
         document.getElementById("balance").textContent = balance.toFixed(2);
         
         if (!bonusClaimed) {
@@ -295,10 +305,7 @@
         function startAd(adIndex) {
             const ad = ads[adIndex - 1];
             // Simulate ad viewing by opening the link
-            window.open(ad.link, "_self");
-            setTimeout(() => {
-                updateBalance(adIndex);
-            }, 5000); // Simulate a delay for ad viewing
+            window.open(ad.link + '?earned=' + ad.earnings, "_self"); // Add earnings to the URL
         }
 
         function updateBalance(adIndex) {
@@ -341,23 +348,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
