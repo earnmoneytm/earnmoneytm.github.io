@@ -266,39 +266,38 @@
                 localStorage.setItem('bonusClaimed', true);
                 bonusClaimed = true; // Update local variable
                 closeModal(); // Close modal after claiming bonus
-                updateDisplay();
+                document.getElementById("balance").innerText = balance.toFixed(2); // Update displayed balance
             }
         }
 
         function startLink() {
-            // Simulating link click
-            currentEarnings = (Math.random() * (0.59 - 0.32) + 0.32).toFixed(2);
-            linksCompleted++;
+            // Random reward between $0.32 and $0.59
+            let reward = (Math.random() * (0.59 - 0.32) + 0.32).toFixed(2);
+            balance += parseFloat(reward);
+            linksCompleted += 1;
 
-            // Accumulate earnings, but do not update the balance yet
-            setTimeout(() => {
-                balance += parseFloat(currentEarnings);
-                localStorage.setItem('balance', balance);
-                localStorage.setItem('linksCompleted', linksCompleted);
-                updateDisplay();
-                // Redirect to the shortened URL
-                window.location.href = 'https://xenfly.com/EdJ9p7qW'; // Your shortened link
-            }, 1800); // Wait for 1.8 seconds
-        }
-
-        function updateDisplay() {
-            document.getElementById("balance").innerText = balance.toFixed(2);
+            // Save new balance and completed links
+            localStorage.setItem('balance', balance);
+            localStorage.setItem('linksCompleted', linksCompleted);
+            document.getElementById("balance").innerText = balance.toFixed(2); // Update displayed balance
             document.getElementById("progress-bar").innerText = linksCompleted + " / 50 Links Completed";
             document.getElementById("progress-bar").style.width = (linksCompleted / 50) * 100 + "%";
 
-            // Enable withdraw button if 50 links completed
-            if (linksCompleted >= 50) {
-                document.getElementById("withdraw-button").disabled = false;
-            }
+            // Redirect to the shortened link in the same tab
+            window.location.href = "https://xenfly.com/EdJ9p7qW";
+
+            // Disable the button and provide a brief delay before re-enabling
+            const linkButton = event.target;
+            linkButton.disabled = true;
+            setTimeout(() => {
+                linkButton.disabled = false; // Re-enable button after 0.5 seconds
+            }, 500);
         }
     </script>
 </body>
 </html>
+
+
 
 
 
