@@ -206,10 +206,15 @@
     </header>
   
     <main>
-        <section class="instructions">
-            <h2 id="instructions-title">Instructions:</h2>
-            <p id="instructions-text">Earn between $0.02 and $0.04 per ad click. Click on ads as many times as you want, and keep the ad tab open for 5 seconds to maximize your earnings!</p>
-        </section>
+       <section class="instructions">
+    <h2 id="instructions-title">Instructions:</h2>
+    <p id="instructions-text">
+        Earn between $0.02 and $0.04 per ad click. <br>
+        Earn $5 if you register on the ad. <br>
+        Register on the ad and maximize your earnings!
+    </p>
+</section>
+
 
         <div class="offer-grid">
             <section class="offer-section">
@@ -307,108 +312,111 @@
         function translatePage() {
             const lang = document.getElementById('languageSelect').value;
             const translations = {
-                en: {
-                    title: "Earn Money by Clicking Ads!",
-                    instructions: "Earn between $0.02 and $0.04 per ad click. Click on ads as many times as you want, and keep the ad tab open for 5 seconds to maximize your earnings!",
-                    withdrawTitle: "Withdraw Your Earnings",
-                    withdrawMessage: "Minimum balance for withdrawal: $20.00",
-                },
-                es: {
-                    title: "¡Gana dinero haciendo clic en anuncios!",
-                    instructions: "Gana entre $0.02 y $0.04 por clic en anuncios. ¡Haz clic en anuncios tantas veces como quieras y mantén la pestaña abierta durante 5 segundos para maximizar tus ganancias!",
-                    withdrawTitle: "Retira tus ganancias",
-                    withdrawMessage: "Saldo mínimo para retirar: $20.00",
-                },
-                fr: {
-                    title: "Gagnez de l'argent en cliquant sur des annonces !",
-                    instructions: "Gagnez entre 0,02 $ et 0,04 $ par clic sur une annonce. Cliquez sur les annonces autant de fois que vous le souhaitez et gardez l'onglet ouvert pendant 5 secondes pour maximiser vos gains !",
-                    withdrawTitle: "Retirez vos gains",
-                    withdrawMessage: "Solde minimum pour le retrait : 20,00 $",
-                },
-                de: {
-                    title: "Verdienen Sie Geld mit dem Klicken auf Anzeigen!",
-                    instructions: "Verdienen Sie zwischen 0,02 $ und 0,04 $ pro Anzeigenklick. Klicken Sie auf Anzeigen, so oft Sie möchten, und halten Sie die Anzeigentabelle 5 Sekunden lang geöffnet, um Ihre Einnahmen zu maximieren!",
-                    withdrawTitle: "Ziehen Sie Ihre Einnahmen ab",
-                    withdrawMessage: "Mindestguthaben für den Abzug: 20,00 $",
-                },
-                ru: {
-                    title: "Зарабатывайте деньги, нажимая на объявления!",
-                    instructions: "Зарабатывайте от 0,02 до 0,04 доллара за клик по объявлению. Нажимайте на объявления столько раз, сколько хотите, и держите вкладку с объявлением открытой в течение 5 секунд, чтобы максимизировать свои доходы!",
-                    withdrawTitle: "Вывести ваши доходы",
-                    withdrawMessage: "Минимальный баланс для вывода: 20,00 $",
-                },
-                uk: {
-                    title: "Заробіть гроші, натискаючи на оголошення!",
-                    instructions: "Заробляйте від 0,02 до 0,04 долара за клік на оголошення. Натискайте на оголошення стільки разів, скільки хочете, і тримайте вкладку з оголошенням відкритою протягом 5 секунд, щоб максимізувати свої доходи!",
-                    withdrawTitle: "Вивести ваші доходи",
-                    withdrawMessage: "Мінімальний баланс для виведення: 20,00 $",
-                },
-                pl: {
-                    title: "Zarabiaj pieniądze, klikając w reklamy!",
-                    instructions: "Zarabiaj od 0,02 do 0,04 USD za kliknięcie reklamy. Klikaj w reklamy tak często, jak chcesz, i trzymaj zakładkę reklamy otwartą przez 5 sekund, aby zmaksymalizować swoje zarobki!",
-                    withdrawTitle: "Wypłać swoje zarobki",
-                    withdrawMessage: "Minimalne saldo do wypłaty: 20,00 $",
-                },
-                it: {
-                    title: "Guadagna denaro cliccando sugli annunci!",
-                    instructions: "Guadagna tra $0.02 e $0.04 per clic su un annuncio. Clicca sugli annunci quante più volte possibile e mantieni aperta la scheda per 5 secondi per massimizzare i tuoi guadagni!",
-                    withdrawTitle: "Preleva i tuoi guadagni",
-                    withdrawMessage: "Saldo minimo per il prelievo: 20,00 $",
-                },
-                pt: {
-                    title: "Ganhe dinheiro clicando em anúncios!",
-                    instructions: "Ganhe entre $0,02 e $0,04 por clique em anúncios. Clique nos anúncios quantas vezes quiser e mantenha a aba do anúncio aberta por 5 segundos para maximizar seus ganhos!",
-                    withdrawTitle: "Retire seus ganhos",
-                    withdrawMessage: "Saldo mínimo para retirada: $20,00",
-                },
-                ro: {
-                    title: "Câștigă bani dând clic pe anunțuri!",
-                    instructions: "Câștigă între 0,02 $ și 0,04 $ pe clic pe anunț. Dă clic pe anunțuri de câte ori vrei și menține fila anunțului deschisă timp de 5 secunde pentru a-ți maximiza câștigurile!",
-                    withdrawTitle: "Retrage-ți câștigurile",
-                    withdrawMessage: "Soldul minim pentru retragere: 20,00 $",
-                },
-                bg: {
-                    title: "Спечелете пари, като щракнете върху реклами!",
-                    instructions: "Спечелете между 0,02 $ и 0,04 $ за клик върху реклама. Щраквайте върху реклами толкова пъти, колкото искате, и дръжте раздела на рекламата отворен в продължение на 5 секунди, за да максимизирате печалбите си!",
-                    withdrawTitle: "Изтеглете печалбите си",
-                    withdrawMessage: "Минимален баланс за теглене: 20,00 $",
-                },
-                cs: {
-                    title: "Získejte peníze kliknutím na reklamy!",
-                    instructions: "Získejte mezi 0,02 $ a 0,04 $ za kliknutí na reklamu. Klikněte na reklamy, kolikrát chcete, a nechte kartu reklamy otevřenou po dobu 5 sekund, abyste maximalizovali své výdělky!",
-                    withdrawTitle: "Vyberte své výdělky",
-                    withdrawMessage: "Minimální zůstatek pro výběr: 20,00 $",
-                },
-                sk: {
-                    title: "Zarobte peniaze kliknutím na reklamy!",
-                    instructions: "Zarobte medzi 0,02 $ a 0,04 $ za klik na reklamu. Kliknite na reklamy toľkokrát, koľkokrát chcete, a nechajte kartu reklamy otvorenú 5 sekúnd, aby ste maximalizovali svoje zárobky!",
-                    withdrawTitle: "Vyberte si svoje zárobky",
-                    withdrawMessage: "Minimálny zostatok na výber: 20,00 $",
-                },
-                hu: {
-                    title: "Keressen pénzt hirdetésekre való kattintással!",
-                    instructions: "Keressen 0,02 $ és 0,04 $ között hirdetésenként. Kattintson a hirdetésekre annyiszor, ahányszor csak szeretné, és tartsa nyitva a hirdetés fülét 5 másodpercig, hogy maximalizálja a bevételét!",
-                    withdrawTitle: "Kérje vissza a nyereségét",
-                    withdrawMessage: "Minimális egyenleg a visszavonáshoz: 20,00 $",
-                },
-                lt: {
-                    title: "Uždirbkite pinigų spustelėdami skelbimus!",
-                    instructions: "Uždirbkite nuo 0,02 USD iki 0,04 USD už paspaudimą. Spustelėkite skelbimus tiek kartų, kiek norite, ir palaikykite skelbimo skirtuką atidarytą 5 sekundes, kad maksimaliai padidintumėte savo pajamas!",
-                    withdrawTitle: "Išimkite savo pajamas",
-                    withdrawMessage: "Minimali balanso suma, kad būtų galima išimti: 20,00 USD",
-                },
-                lv: {
-                    title: "Pelni naudu, noklikšķinot uz sludinājumiem!",
-                    instructions: "Pelni no 0,02 USD līdz 0,04 USD par klikšķi. Noklikšķiniet uz sludinājumiem tik daudz reižu, cik vēlaties, un turiet sludinājuma cilni atvērtu 5 sekundes, lai maksimāli palielinātu savus ienākumus!",
-                    withdrawTitle: "Izņemiet savus ienākumus",
-                    withdrawMessage: "Minimālais atlikums izņemšanai: 20,00 USD",
-                },
-                et: {
-                    title: "Teenige raha reklaamidele klikates!",
-                    instructions: "Teenige reklaami kliki eest 0,02 kuni 0,04 dollarit. Kliki reklaamidele nii palju kordi kui soovid ja hoia reklaami vahelehte 5 sekundit avatuna, et maksimeerida oma tulu!",
-                    withdrawTitle: "Võtke oma tulud välja",
-                    withdrawMessage: "Minimaalne saldo väljamiseks: 20,00 $",
-                }
+             {
+  {
+    "en": {
+        "title": "Earn Money by Clicking Ads!",
+        "instructions": "Earn between $0.02 and $0.04 per ad click. Earn $5 if you register on the ad. Register on the ad and maximize your earnings!",
+        "withdrawTitle": "Withdraw Your Earnings",
+        "withdrawMessage": "Minimum balance for withdrawal: $20.00"
+    },
+    "es": {
+        "title": "¡Gana dinero haciendo clic en anuncios!",
+        "instructions": "Gana entre $0.02 y $0.04 por clic en anuncios. Gana $5 si te registras en el anuncio. ¡Regístrate en el anuncio y maximiza tus ganancias!",
+        "withdrawTitle": "Retira tus ganancias",
+        "withdrawMessage": "Saldo mínimo para retirar: $20.00"
+    },
+    "fr": {
+        "title": "Gagnez de l'argent en cliquant sur des annonces !",
+        "instructions": "Gagnez entre 0,02 $ et 0,04 $ par clic sur une annonce. Gagnez 5 $ si vous vous inscrivez à l'annonce. Inscrivez-vous sur l'annonce et maximisez vos gains !",
+        "withdrawTitle": "Retirez vos gains",
+        "withdrawMessage": "Solde minimum pour le retrait : 20,00 $"
+    },
+    "de": {
+        "title": "Verdienen Sie Geld mit dem Klicken auf Anzeigen!",
+        "instructions": "Verdienen Sie zwischen 0,02 $ und 0,04 $ pro Anzeigenklick. Verdienen Sie 5 $, wenn Sie sich auf der Anzeige registrieren. Registrieren Sie sich auf der Anzeige und maximieren Sie Ihre Einnahmen!",
+        "withdrawTitle": "Ziehen Sie Ihre Einnahmen ab",
+        "withdrawMessage": "Mindestguthaben für den Abzug: 20,00 $"
+    },
+    "ru": {
+        "title": "Зарабатывайте деньги, нажимая на объявления!",
+        "instructions": "Зарабатывайте от 0,02 до 0,04 доллара за клик по объявлению. Заработайте 5 долларов, если зарегистрируетесь по объявлению. Зарегистрируйтесь по объявлению и увеличьте свои доходы!",
+        "withdrawTitle": "Вывести ваши доходы",
+        "withdrawMessage": "Минимальный баланс для вывода: 20,00 $"
+    },
+    "uk": {
+        "title": "Заробіть гроші, натискаючи на оголошення!",
+        "instructions": "Заробляйте від 0,02 до 0,04 долара за клік на оголошення. Заробляйте 5 доларів, якщо зареєструєтесь за оголошенням. Зареєструйтеся на оголошенні та максимізуйте свої доходи!",
+        "withdrawTitle": "Вивести ваші доходи",
+        "withdrawMessage": "Мінімальний баланс для виведення: 20,00 $"
+    },
+    "pl": {
+        "title": "Zarabiaj pieniądze, klikając w reklamy!",
+        "instructions": "Zarabiaj od 0,02 do 0,04 USD za kliknięcie reklamy. Zarabiaj 5 USD, jeśli zarejestrujesz się na reklame. Zarejestruj się i zmaksymalizuj swoje zarobki!",
+        "withdrawTitle": "Wypłać swoje zarobki",
+        "withdrawMessage": "Minimalne saldo do wypłaty: 20,00 $"
+    },
+    "it": {
+        "title": "Guadagna denaro cliccando sugli annunci!",
+        "instructions": "Guadagna tra $0.02 e $0.04 per clic su un annuncio. Guadagna $5 se ti registri all'annuncio. Registrati all'annuncio e massimizza i tuoi guadagni!",
+        "withdrawTitle": "Preleva i tuoi guadagni",
+        "withdrawMessage": "Saldo minimo per il prelievo: 20,00 $"
+    },
+    "pt": {
+        "title": "Ganhe dinheiro clicando em anúncios!",
+        "instructions": "Ganhe entre $0,02 e $0,04 por clique em anúncios. Ganhe $5 se você se registrar no anúncio. Registre-se no anúncio e maximize seus ganhos!",
+        "withdrawTitle": "Retire seus ganhos",
+        "withdrawMessage": "Saldo mínimo para retirada: $20,00"
+    },
+    "ro": {
+        "title": "Câștigă bani dând clic pe anunțuri!",
+        "instructions": "Câștigă între 0,02 $ și 0,04 $ pe clic pe anunț. Câștigă 5 $ dacă te înregistrezi la anunț. Înregistrează-te la anunț și maximizează-ți câștigurile!",
+        "withdrawTitle": "Retrage-ți câștigurile",
+        "withdrawMessage": "Soldul minim pentru retragere: 20,00 $"
+    },
+    "bg": {
+        "title": "Спечелете пари, като щракнете върху реклами!",
+        "instructions": "Спечелете между 0,02 $ и 0,04 $ за клик върху реклама. Спечелете 5 $, ако се регистрирате на рекламата. Регистрирайте се на рекламата и увеличете максимално печалбите си!",
+        "withdrawTitle": "Изтеглете печалбите си",
+        "withdrawMessage": "Минимален баланс за теглене: 20,00 $"
+    },
+    "cs": {
+        "title": "Získejte peníze kliknutím na reklamy!",
+        "instructions": "Získejte mezi 0,02 $ a 0,04 $ za kliknutí na reklamu. Získejte 5 $, pokud se zaregistrujete na reklamě. Zaregistrujte se na reklamě a maximalizujte své výdělky!",
+        "withdrawTitle": "Vyberte své výdělky",
+        "withdrawMessage": "Minimální zůstatek pro výběr: 20,00 $"
+    },
+    "sk": {
+        "title": "Zarobte peniaze kliknutím na reklamy!",
+        "instructions": "Zarobte medzi 0,02 $ a 0,04 $ za klik na reklamu. Zarobte 5 $, ak sa zaregistrujete na reklame. Zaregistrujte sa na reklame a maximalizujte svoje zárobky!",
+        "withdrawTitle": "Vyberte si svoje zárobky",
+        "withdrawMessage": "Minimálny zostatok na výber: 20,00 $"
+    },
+    "hu": {
+        "title": "Keressen pénzt hirdetésekre való kattintással!",
+        "instructions": "Keressen 0,02 $ és 0,04 $ között hirdetésenként. Keressen 5 $, ha regisztrál a hirdetésen. Regisztráljon a hirdetésen, és maximalizálja bevételét!",
+        "withdrawTitle": "Kérje vissza a nyereségét",
+        "withdrawMessage": "Minimális egyenleg a visszavonáshoz: 20,00 $"
+    },
+    "lt": {
+        "title": "Uždirbkite pinigų spustelėdami skelbimus!",
+        "instructions": "Uždirbkite nuo 0,02 iki 0,04 USD už paspaudimą. Uždirbkite 5 USD, jei užsiregistruosite skelbime. Užsiregistruokite ir maksimaliai padidinkite savo pajamas!",
+        "withdrawTitle": "Išimkite savo pajamas",
+        "withdrawMessage": "Minimali balanso suma, kad būtų galima išimti: 20,00 USD"
+    },
+    "lv": {
+        "title": "Pelni naudu, noklikšķinot uz sludinājumiem!",
+        "instructions": "Pelni no 0,02 līdz 0,04 USD par klikšķi. Pelni 5 USD, ja reģistrējies sludinājumā. Reģistrējies un maksimizē savus ienākumus!",
+        "withdrawTitle": "Izņemiet savus ienākumus",
+        "withdrawMessage": "Minimālais atlikums izņemšanai: 20,00 USD"
+    },
+    "et": {
+        "title": "Teenige raha, klõpsates reklaamidele!",
+        "instructions": "Teenige reklaami kliki eest 0,02 kuni 0,04 dollarit. Teenige 5 dollarit, kui registreerute reklaamis. Registreeruge reklaamis ja maksimeerige oma tulu!",
+        "withdrawTitle": "Võtke oma tulud välja",
+        "withdrawMessage": "Minimaalne saldo väljavõtmiseks: 20,00 $"
+    }
+
             };
 
             document.getElementById('page-title').textContent = translations[lang].title;
