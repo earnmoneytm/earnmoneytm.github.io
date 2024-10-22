@@ -206,225 +206,287 @@
     </header>
   
     <main>
-       <section class="instructions">
-    <h2 id="instructions-title">Instructions:</h2>
-    <p id="instructions-text">
-        Earn between $0.02 and $0.04 per ad click. <br>
-        Earn $5 if you register on the ad. <br>
-        Register on the ad and maximize your earnings!
-    </p>
-</section>
-
+        <section class="instructions">
+            <h2 id="instructions-title">Instructions:</h2>
+            <p id="instructions-text">
+                Earn between $0.02 and $0.04 per ad click. <br>
+                Earn $5 if you register on the ad. <br>
+                Register on the ad and maximize your earnings!
+            </p>
+        </section>
 
         <div class="offer-grid">
             <section class="offer-section">
-    <h2 class="offer-title" id="offer-title">Earn $0.02 to $0.04 per click!</h2>
-    <a class="offer-button" href="https://www.cpmrevenuegate.com/vwaw0qafj?key=1d872ac80c4317cab3f236b0ea0c806f" target="_blank" onclick="startOffer(0.02)">Click Ad</a>
-</section>
-<section class="offer-section">
-    <h2 class="offer-title" id="offer-title-2">Earn $0.02 to $0.04 per click!</h2>
-    <a class="offer-button" href="https://www.cpmrevenuegate.com/vwaw0qafj?key=1d872ac80c4317cab3f236b0ea0c806f" target="_blank" onclick="startOffer(0.03)">Click Ad</a>
-</section>
-<section class="offer-section">
-    <h2 class="offer-title" id="offer-title-3">Earn $0.02 to $0.04 per click!</h2>
-    <a class="offer-button" href="https://www.cpmrevenuegate.com/vwaw0qafj?key=1d872ac80c4317cab3f236b0ea0c806f" target="_blank" onclick="startOffer(0.04)">Click Ad</a>
-</section>
-<section class="offer-section">
-    <h2 class="offer-title" id="offer-title-3">Earn $0.02 to $0.04 per click!</h2>
-    <a class="offer-button" href="https://www.cpmrevenuegate.com/vwaw0qafj?key=1d872ac80c4317cab3f236b0ea0c806f" target="_blank" onclick="startOffer(0.04)">Click Ad</a>
-</section>
-
+                <h2 class="offer-title" id="offer-title">Earn $0.02 to $0.04 per click!</h2>
+                <a class="offer-button" href="https://www.cpmrevenuegate.com/vwaw0qafj?key=1d872ac80c4317cab3f236b0ea0c806f" target="_blank" onclick="startOffer(0.02)">Click Ad</a>
+            </section>
+            <section class="offer-section">
+                <h2 class="offer-title" id="offer-title-2">Earn $0.02 to $0.04 per click!</h2>
+                <a class="offer-button" href="https://www.cpmrevenuegate.com/vwaw0qafj?key=1d872ac80c4317cab3f236b0ea0c806f" target="_blank" onclick="startOffer(0.03)">Click Ad</a>
+            </section>
+            <section class="offer-section">
+                <h2 class="offer-title" id="offer-title-3">Earn $0.02 to $0.04 per click!</h2>
+                <a class="offer-button" href="https://www.cpmrevenuegate.com/vwaw0qafj?key=1d872ac80c4317cab3f236b0ea0c806f" target="_blank" onclick="startOffer(0.04)">Click Ad</a>
+            </section>
+            <section class="offer-section">
+                <h2 class="offer-title" id="offer-title-4">Earn $0.02 to $0.04 per click!</h2>
+                <a class="offer-button" href="https://www.cpmrevenuegate.com/vwaw0qafj?key=1d872ac80c4317cab3f236b0ea0c806f" target="_blank" onclick="startOffer(0.04)">Click Ad</a>
+            </section>
         </div>
 
         <div class="withdraw-section">
-            <h2 id="withdraw-title">Withdraw Your Earnings</h2>
-            <button id="withdraw-button" disabled>Withdraw Earnings</button>
-            <p id="withdraw-message">Minimum balance for withdrawal: $20.00</p>
+            <p id="withdraw-info">You need a minimum of $20.00 to withdraw.</p>
+            <button id="withdraw-button" disabled onclick="withdraw()">Withdraw</button>
         </div>
     </main>
 
-    <footer>
-        <p>© 2024 Your Company Name. All rights reserved.</p>
-    </footer>
-
-    <!-- Modal -->
-    <div class="modal" id="bonusModal">
+    <div class="modal" id="bonus-modal">
         <div class="modal-content">
-            <h2 id="bonus-title">🎉 Welcome! 🎉</h2>
-            <p id="bonus-message">Get a bonus of $5.00 just for signing up!</p>
-            <button class="claim-button" id="claim-bonus">Claim Bonus</button>
+            <h2 id="bonus-title">Welcome Bonus!</h2>
+            <p id="bonus-text">You have received a bonus of $5.00!</p>
+            <button class="claim-button" onclick="claimBonus()">Claim Bonus</button>
         </div>
     </div>
 
+    <footer>
+        <p id="footer-text">&copy; 2024 Earn Money by Clicking Ads! All rights reserved.</p>
+    </footer>
+
     <script>
-        window.onload = function() {
-            // Check if the bonus has been claimed
-            const bonusClaimed = localStorage.getItem('bonusClaimed');
-            const bonusModal = document.getElementById('bonusModal');
-            if (!bonusClaimed) {
-                bonusModal.style.display = 'flex';
-            }
+        let balance = parseFloat(localStorage.getItem('balance')) || 0;
 
-            // Initialize balance from localStorage
-            let balance = localStorage.getItem('balance');
-            if (balance === null) {
-                balance = 0;
-            } else {
-                balance = parseFloat(balance);
-            }
-            document.getElementById('balance').textContent = balance.toFixed(2);
-            updateWithdrawButton(balance);
-        };
-
-        // Function to update the withdraw button state
-        function updateWithdrawButton(balance) {
-            const withdrawButton = document.getElementById('withdraw-button');
-            if (balance >= 20) {
-                withdrawButton.disabled = false;
-            } else {
-                withdrawButton.disabled = true;
-            }
+        function updateBalanceDisplay() {
+            document.getElementById('balance').innerText = balance.toFixed(2);
+            document.getElementById('withdraw-button').disabled = balance < 20;
         }
 
-        // Function to start offer and update balance
         function startOffer(amount) {
-            const balanceElement = document.getElementById('balance');
-            let balance = parseFloat(balanceElement.textContent);
             balance += amount;
-            balanceElement.textContent = balance.toFixed(2);
             localStorage.setItem('balance', balance);
-            updateWithdrawButton(balance);
+            updateBalanceDisplay();
         }
 
-        // Function to claim bonus
-        document.getElementById('claim-bonus').onclick = function() {
-            const balanceElement = document.getElementById('balance');
-            let balance = parseFloat(balanceElement.textContent);
-            balance += 5.00; // Adding bonus amount
-            balanceElement.textContent = balance.toFixed(2);
-            localStorage.setItem('balance', balance);
-            localStorage.setItem('bonusClaimed', 'true'); // Set bonus as claimed
-            document.getElementById('bonusModal').style.display = 'none';
-            updateWithdrawButton(balance);
+        function withdraw() {
+            if (balance >= 20) {
+                alert('Withdrawal successful!');
+                balance -= 20;
+                localStorage.setItem('balance', balance);
+                updateBalanceDisplay();
+            } else {
+                alert('You need at least $20.00 to withdraw.');
+            }
+        }
+
+        function claimBonus() {
+    balance += 5; // Aumenta el saldo en $5
+    localStorage.setItem('balance', balance); // Guarda el nuevo saldo
+    updateBalanceDisplay(); // Actualiza la visualización del saldo
+    document.getElementById('bonus-modal').style.display = 'none'; // Oculta el modal
+    localStorage.setItem('bonusClaimed', 'true'); // Marca que el bono fue reclamado
+}
+
+function showBonusModal() {
+    const bonusClaimed = localStorage.getItem('bonusClaimed'); // Verifica si el bono ya fue reclamado
+    if (!bonusClaimed) { // Si el bono no ha sido reclamado
+        document.getElementById('bonus-modal').style.display = 'flex'; // Muestra el modal
+    }
+}
+
+// Verifica el estado del bono al cargar la página
+window.onload = function() {
+    updateBalanceDisplay(); // Actualiza la visualización del saldo
+    showBonusModal(); // Muestra el modal de bonificación si no ha sido reclamado
+};
+
+
+        // Translation logic
+        const translations = {
+            en: {
+                title: "Earn Money by Clicking Ads!",
+                instructionsTitle: "Instructions:",
+                instructionsText: "Earn between $0.02 and $0.04 per ad click. <br> Earn $5 if you register on the ad. <br> Register on the ad and maximize your earnings!",
+                offerTitle: "Earn $0.02 to $0.04 per click!",
+                withdrawInfo: "You need a minimum of $20.00 to withdraw.",
+                bonusTitle: "Welcome Bonus!",
+                bonusText: "You have received a bonus of $5.00!",
+                footerText: "&copy; 2024 Earn Money by Clicking Ads! All rights reserved."
+            },
+            es: {
+                title: "¡Gana dinero haciendo clic en anuncios!",
+                instructionsTitle: "Instrucciones:",
+                instructionsText: "Gana entre $0.02 y $0.04 por clic en anuncios. <br> Gana $5 si te registras en el anuncio. <br> ¡Regístrate en el anuncio y maximiza tus ganancias!",
+                offerTitle: "¡Gana $0.02 a $0.04 por clic!",
+                withdrawInfo: "Necesitas un mínimo de $20.00 para retirar.",
+                bonusTitle: "¡Bonificación de bienvenida!",
+                bonusText: "¡Has recibido una bonificación de $5.00!",
+                footerText: "&copy; 2024 ¡Gana dinero haciendo clic en anuncios! Todos los derechos reservados."
+            },
+            fr: {
+                title: "Gagnez de l'argent en cliquant sur des annonces !",
+                instructionsTitle: "Instructions :",
+                instructionsText: "Gagnez entre 0,02 $ et 0,04 $ par clic sur une annonce. <br> Gagnez 5 $ si vous vous inscrivez sur l'annonce. <br> Inscrivez-vous sur l'annonce et maximisez vos gains !",
+                offerTitle: "Gagnez de 0,02 $ à 0,04 $ par clic !",
+                withdrawInfo: "Vous avez besoin d'un minimum de 20,00 $ pour retirer.",
+                bonusTitle: "Bonus de bienvenue !",
+                bonusText: "Vous avez reçu un bonus de 5,00 $ !",
+                footerText: "&copy; 2024 Gagnez de l'argent en cliquant sur des annonces ! Tous droits réservés."
+            },
+            de: {
+                title: "Verdienen Sie Geld mit dem Klicken auf Anzeigen!",
+                instructionsTitle: "Anweisungen:",
+                instructionsText: "Verdienen Sie zwischen 0,02 $ und 0,04 $ pro Klick auf eine Anzeige. <br> Verdienen Sie 5 $, wenn Sie sich für die Anzeige registrieren. <br> Registrieren Sie sich bei der Anzeige und maximieren Sie Ihre Einnahmen!",
+                offerTitle: "Verdienen Sie 0,02 $ bis 0,04 $ pro Klick!",
+                withdrawInfo: "Sie benötigen mindestens 20,00 $, um abzuheben.",
+                bonusTitle: "Willkommensbonus!",
+                bonusText: "Sie haben einen Bonus von 5,00 $ erhalten!",
+                footerText: "&copy; 2024 Verdienen Sie Geld mit dem Klicken auf Anzeigen! Alle Rechte vorbehalten."
+            },
+            ru: {
+                title: "Зарабатывайте деньги, щелкая по рекламе!",
+                instructionsTitle: "Инструкции:",
+                instructionsText: "Зарабатывайте от 0,02 до 0,04 доллара за клик по рекламе. <br> Заработайте 5 долларов, если зарегистрируетесь на рекламе. <br> Зарегистрируйтесь на рекламе и максимизируйте свои доходы!",
+                offerTitle: "Зарабатывайте от 0,02 до 0,04 доллара за клик!",
+                withdrawInfo: "Вам необходимо минимум 20,00 долларов для вывода.",
+                bonusTitle: "Бонус за регистрацию!",
+                bonusText: "Вы получили бонус в размере 5,00 долларов!",
+                footerText: "&copy; 2024 Зарабатывайте деньги, щелкая по рекламе! Все права защищены."
+            },
+            uk: {
+                title: "Заробляйте гроші, натискаючи на рекламу!",
+                instructionsTitle: "Інструкції:",
+                instructionsText: "Заробляйте від 0,02 до 0,04 долара за клік на рекламу. <br> Заробіть 5 доларів, якщо зареєструєтеся на рекламі. <br> Зареєструйтесь на рекламі та максимізуйте свої доходи!",
+                offerTitle: "Заробляйте від 0,02 до 0,04 долара за клік!",
+                withdrawInfo: "Вам потрібно мінімум 20,00 доларів для виведення.",
+                bonusTitle: "Бонус за реєстрацію!",
+                bonusText: "Ви отримали бонус у розмірі 5,00 доларів!",
+                footerText: "&copy; 2024 Заробляйте гроші, натискаючи на рекламу! Усі права захищені."
+            },
+            pl: {
+                title: "Zarabiaj pieniądze, klikając w reklamy!",
+                instructionsTitle: "Instrukcje:",
+                instructionsText: "Zarabiaj od 0,02 do 0,04 dolara za kliknięcie w reklamę. <br> Zarób 5 dolarów, jeśli zarejestrujesz się w reklamie. <br> Zarejestruj się w reklamie i zmaksymalizuj swoje zarobki!",
+                offerTitle: "Zarabiaj od 0,02 do 0,04 dolara za kliknięcie!",
+                withdrawInfo: "Musisz mieć co najmniej 20,00 dolarów, aby wypłacić.",
+                bonusTitle: "Bonus powitalny!",
+                bonusText: "Otrzymałeś bonus w wysokości 5,00 dolarów!",
+                footerText: "&copy; 2024 Zarabiaj pieniądze, klikając w reklamy! Wszelkie prawa zastrzeżone."
+            },
+            it: {
+                title: "Guadagna soldi cliccando sugli annunci!",
+                instructionsTitle: "Istruzioni:",
+                instructionsText: "Guadagna tra $0.02 e $0.04 per clic. <br> Guadagna $5 se ti registri nell'annuncio. <br> Registrati nell'annuncio e massimizza i tuoi guadagni!",
+                offerTitle: "Guadagna $0.02 a $0.04 per clic!",
+                withdrawInfo: "Hai bisogno di un minimo di $20.00 per prelevare.",
+                bonusTitle: "Bonus di benvenuto!",
+                bonusText: "Hai ricevuto un bonus di $5.00!",
+                footerText: "&copy; 2024 Guadagna soldi cliccando sugli annunci! Tutti i diritti riservati."
+            },
+            pt: {
+                title: "Ganhe dinheiro clicando em anúncios!",
+                instructionsTitle: "Instruções:",
+                instructionsText: "Ganhe entre $0.02 e $0.04 por clique em anúncios. <br> Ganhe $5 se se registrar no anúncio. <br> Registre-se no anúncio e maximize seus ganhos!",
+                offerTitle: "Ganhe $0.02 a $0.04 por clique!",
+                withdrawInfo: "Você precisa de um mínimo de $20,00 para sacar.",
+                bonusTitle: "Bônus de boas-vindas!",
+                bonusText: "Você recebeu um bônus de $5,00!",
+                footerText: "&copy; 2024 Ganhe dinheiro clicando em anúncios! Todos os direitos reservados."
+            },
+            ro: {
+                title: "Câștigă bani făcând clic pe anunțuri!",
+                instructionsTitle: "Instrucciuni:",
+                instructionsText: "Câștigă între 0,02 și 0,04 $ pe clic. <br> Câștigă 5 $ dacă te înregistrezi pe anunț. <br> Înregistrează-te pe anunț și maximizează câștigurile!",
+                offerTitle: "Câștigă 0,02 până la 0,04 $ pe clic!",
+                withdrawInfo: "Trebuie să ai un minim de 20,00 $ pentru a retrage.",
+                bonusTitle: "Bonus de bun venit!",
+                bonusText: "Ai primit un bonus de 5,00 $!",
+                footerText: "&copy; 2024 Câștigă bani făcând clic pe anunțuri! Toate drepturile rezervate."
+            },
+            bg: {
+                title: "Спечелете пари, като щракнете върху реклами!",
+                instructionsTitle: "Инструкции:",
+                instructionsText: "Спечелете между $0.02 и $0.04 за клик върху реклама. <br> Спечелете $5, ако се регистрирате за рекламата. <br> Регистрирайте се за рекламата и максимизирайте печалбите си!",
+                offerTitle: "Спечелете $0.02 до $0.04 за клик!",
+                withdrawInfo: "Трябва да имате минимум $20.00, за да изтеглите.",
+                bonusTitle: "Бонус за добре дошли!",
+                bonusText: "Получихте бонус от $5.00!",
+                footerText: "&copy; 2024 Спечелете пари, като щракнете върху реклами! Всички права запазени."
+            },
+            cs: {
+                title: "Vydělávejte peníze kliknutím na reklamy!",
+                instructionsTitle: "Pokyny:",
+                instructionsText: "Vydělávejte mezi 0,02 $ a 0,04 $ za kliknutí. <br> Vydělejte 5 $, pokud se zaregistrujete na reklamě. <br> Zaregistrujte se na reklamu a maximalizujte své výdělky!",
+                offerTitle: "Vydělejte 0,02 až 0,04 $ za kliknutí!",
+                withdrawInfo: "Potřebujete minimálně 20,00 $, abyste mohli vybrat.",
+                bonusTitle: "Uvítací bonus!",
+                bonusText: "Obdrželi jste bonus ve výši 5,00 $!",
+                footerText: "&copy; 2024 Vydělávejte peníze kliknutím na reklamy! Všechna práva vyhrazena."
+            },
+            sk: {
+                title: "Zarábajte peniaze kliknutím na reklamy!",
+                instructionsTitle: "Pokyny:",
+                instructionsText: "Získajte medzi 0,02 a 0,04 $ za klik. <br> Získajte 5 $, ak sa zaregistrujete na reklame. <br> Zaregistrujte sa na reklame a maximalizujte svoje zárobky!",
+                offerTitle: "Získajte 0,02 až 0,04 $ za klik!",
+                withdrawInfo: "Na výber potrebujete minimálne 20,00 $.",
+                bonusTitle: "Uvítací bonus!",
+                bonusText: "Dostali ste bonus 5,00 $!",
+                footerText: "&copy; 2024 Zarábajte peniaze kliknutím na reklamy! Všetky práva vyhradené."
+            },
+            hu: {
+                title: "Keress pénzt hirdetésekre kattintva!",
+                instructionsTitle: "Utmutatás:",
+                instructionsText: "Keress 0,02 és 0,04 dollár között kattintásonként. <br> Keress 5 dollárt, ha regisztrálsz a hirdetésre. <br> Regisztrálj a hirdetésre és maximalizáld a bevételeidet!",
+                offerTitle: "Keress 0,02 és 0,04 dollár között kattintásonként!",
+                withdrawInfo: "Minimum 20,00 dollárt kell kivenned.",
+                bonusTitle: "Üdvözlő bónusz!",
+                bonusText: "Öt dolláros bónuszt kaptál!",
+                footerText: "&copy; 2024 Keress pénzt hirdetésekre kattintva! Minden jog fenntartva."
+            },
+            lt: {
+                title: "Uždirbkite pinigų paspaudę skelbimus!",
+                instructionsTitle: "Nurodymai:",
+                instructionsText: "Uždirbkite nuo 0,02 iki 0,04 dolerio už paspaudimą. <br> Uždirbkite 5 dolerius, jei užsiregistruosite skelbime. <br> Uždarykite skelbimą ir maksimaliai padidinkite savo pajamas!",
+                offerTitle: "Uždirbkite 0,02–0,04 dolerio už paspaudimą!",
+                withdrawInfo: "Jums reikia mažiausiai 20,00 dolerių, kad galėtumėte atsiimti.",
+                bonusTitle: "Sveikinimo premija!",
+                bonusText: "Gavote 5,00 dolerio premiją!",
+                footerText: "&copy; 2024 Uždirbkite pinigų paspaudę skelbimus! Visos teisės saugomos."
+            },
+            lv: {
+                title: "Pelni naudu, noklikšķinot uz reklāmām!",
+                instructionsTitle: "Norādījumi:",
+                instructionsText: "Pelniet no 0,02 līdz 0,04 dolāriem par klikšķi. <br> Pelniet 5 dolārus, ja reģistrējaties reklāmā. <br> Reģistrējieties reklāmā un maksimizējiet savus ienākumus!",
+                offerTitle: "Pelniet 0,02 līdz 0,04 dolārus par klikšķi!",
+                withdrawInfo: "Jums nepieciešami vismaz 20,00 dolāri, lai izņemtu.",
+                bonusTitle: "Laipni lūdzam bonusa!",
+                bonusText: "Jūs saņēmuši 5,00 dolāru bonusu!",
+                footerText: "&copy; 2024 Pelni naudu, noklikšķinot uz reklāmām! Visas tiesības aizsargātas."
+            },
+            et: {
+                title: "Kuidas teenida raha reklaamidele klikkides!",
+                instructionsTitle: "Juhised:",
+                instructionsText: "Teeni iga reklaami klikkimise eest $0,02 kuni $0,04. <br> Teenige 5 dollarit, kui registreerite reklaami. <br> Registreeru reklaamis ja maksimeeri oma sissetulekud!",
+                offerTitle: "Teeni $0,02 kuni $0,04 iga kliki eest!",
+                withdrawInfo: "Te peate välja võtma vähemalt 20,00 dollarit.",
+                bonusTitle: "Tere tulemast boonus!",
+                bonusText: "Olete saanud 5,00 dollari boonuse!",
+                footerText: "&copy; 2024 Teenige raha reklaamidele klikkides! Kõik õigused kaitstud."
+            }
         };
 
-        // Function to translate the page
         function translatePage() {
-            const lang = document.getElementById('languageSelect').value;
-            const translations = {
-             {
-  {
-    "en": {
-        "title": "Earn Money by Clicking Ads!",
-        "instructions": "Earn between $0.02 and $0.04 per ad click. Earn $5 if you register on the ad. Register on the ad and maximize your earnings!",
-        "withdrawTitle": "Withdraw Your Earnings",
-        "withdrawMessage": "Minimum balance for withdrawal: $20.00"
-    },
-    "es": {
-        "title": "¡Gana dinero haciendo clic en anuncios!",
-        "instructions": "Gana entre $0.02 y $0.04 por clic en anuncios. Gana $5 si te registras en el anuncio. ¡Regístrate en el anuncio y maximiza tus ganancias!",
-        "withdrawTitle": "Retira tus ganancias",
-        "withdrawMessage": "Saldo mínimo para retirar: $20.00"
-    },
-    "fr": {
-        "title": "Gagnez de l'argent en cliquant sur des annonces !",
-        "instructions": "Gagnez entre 0,02 $ et 0,04 $ par clic sur une annonce. Gagnez 5 $ si vous vous inscrivez à l'annonce. Inscrivez-vous sur l'annonce et maximisez vos gains !",
-        "withdrawTitle": "Retirez vos gains",
-        "withdrawMessage": "Solde minimum pour le retrait : 20,00 $"
-    },
-    "de": {
-        "title": "Verdienen Sie Geld mit dem Klicken auf Anzeigen!",
-        "instructions": "Verdienen Sie zwischen 0,02 $ und 0,04 $ pro Anzeigenklick. Verdienen Sie 5 $, wenn Sie sich auf der Anzeige registrieren. Registrieren Sie sich auf der Anzeige und maximieren Sie Ihre Einnahmen!",
-        "withdrawTitle": "Ziehen Sie Ihre Einnahmen ab",
-        "withdrawMessage": "Mindestguthaben für den Abzug: 20,00 $"
-    },
-    "ru": {
-        "title": "Зарабатывайте деньги, нажимая на объявления!",
-        "instructions": "Зарабатывайте от 0,02 до 0,04 доллара за клик по объявлению. Заработайте 5 долларов, если зарегистрируетесь по объявлению. Зарегистрируйтесь по объявлению и увеличьте свои доходы!",
-        "withdrawTitle": "Вывести ваши доходы",
-        "withdrawMessage": "Минимальный баланс для вывода: 20,00 $"
-    },
-    "uk": {
-        "title": "Заробіть гроші, натискаючи на оголошення!",
-        "instructions": "Заробляйте від 0,02 до 0,04 долара за клік на оголошення. Заробляйте 5 доларів, якщо зареєструєтесь за оголошенням. Зареєструйтеся на оголошенні та максимізуйте свої доходи!",
-        "withdrawTitle": "Вивести ваші доходи",
-        "withdrawMessage": "Мінімальний баланс для виведення: 20,00 $"
-    },
-    "pl": {
-        "title": "Zarabiaj pieniądze, klikając w reklamy!",
-        "instructions": "Zarabiaj od 0,02 do 0,04 USD za kliknięcie reklamy. Zarabiaj 5 USD, jeśli zarejestrujesz się na reklame. Zarejestruj się i zmaksymalizuj swoje zarobki!",
-        "withdrawTitle": "Wypłać swoje zarobki",
-        "withdrawMessage": "Minimalne saldo do wypłaty: 20,00 $"
-    },
-    "it": {
-        "title": "Guadagna denaro cliccando sugli annunci!",
-        "instructions": "Guadagna tra $0.02 e $0.04 per clic su un annuncio. Guadagna $5 se ti registri all'annuncio. Registrati all'annuncio e massimizza i tuoi guadagni!",
-        "withdrawTitle": "Preleva i tuoi guadagni",
-        "withdrawMessage": "Saldo minimo per il prelievo: 20,00 $"
-    },
-    "pt": {
-        "title": "Ganhe dinheiro clicando em anúncios!",
-        "instructions": "Ganhe entre $0,02 e $0,04 por clique em anúncios. Ganhe $5 se você se registrar no anúncio. Registre-se no anúncio e maximize seus ganhos!",
-        "withdrawTitle": "Retire seus ganhos",
-        "withdrawMessage": "Saldo mínimo para retirada: $20,00"
-    },
-    "ro": {
-        "title": "Câștigă bani dând clic pe anunțuri!",
-        "instructions": "Câștigă între 0,02 $ și 0,04 $ pe clic pe anunț. Câștigă 5 $ dacă te înregistrezi la anunț. Înregistrează-te la anunț și maximizează-ți câștigurile!",
-        "withdrawTitle": "Retrage-ți câștigurile",
-        "withdrawMessage": "Soldul minim pentru retragere: 20,00 $"
-    },
-    "bg": {
-        "title": "Спечелете пари, като щракнете върху реклами!",
-        "instructions": "Спечелете между 0,02 $ и 0,04 $ за клик върху реклама. Спечелете 5 $, ако се регистрирате на рекламата. Регистрирайте се на рекламата и увеличете максимално печалбите си!",
-        "withdrawTitle": "Изтеглете печалбите си",
-        "withdrawMessage": "Минимален баланс за теглене: 20,00 $"
-    },
-    "cs": {
-        "title": "Získejte peníze kliknutím na reklamy!",
-        "instructions": "Získejte mezi 0,02 $ a 0,04 $ za kliknutí na reklamu. Získejte 5 $, pokud se zaregistrujete na reklamě. Zaregistrujte se na reklamě a maximalizujte své výdělky!",
-        "withdrawTitle": "Vyberte své výdělky",
-        "withdrawMessage": "Minimální zůstatek pro výběr: 20,00 $"
-    },
-    "sk": {
-        "title": "Zarobte peniaze kliknutím na reklamy!",
-        "instructions": "Zarobte medzi 0,02 $ a 0,04 $ za klik na reklamu. Zarobte 5 $, ak sa zaregistrujete na reklame. Zaregistrujte sa na reklame a maximalizujte svoje zárobky!",
-        "withdrawTitle": "Vyberte si svoje zárobky",
-        "withdrawMessage": "Minimálny zostatok na výber: 20,00 $"
-    },
-    "hu": {
-        "title": "Keressen pénzt hirdetésekre való kattintással!",
-        "instructions": "Keressen 0,02 $ és 0,04 $ között hirdetésenként. Keressen 5 $, ha regisztrál a hirdetésen. Regisztráljon a hirdetésen, és maximalizálja bevételét!",
-        "withdrawTitle": "Kérje vissza a nyereségét",
-        "withdrawMessage": "Minimális egyenleg a visszavonáshoz: 20,00 $"
-    },
-    "lt": {
-        "title": "Uždirbkite pinigų spustelėdami skelbimus!",
-        "instructions": "Uždirbkite nuo 0,02 iki 0,04 USD už paspaudimą. Uždirbkite 5 USD, jei užsiregistruosite skelbime. Užsiregistruokite ir maksimaliai padidinkite savo pajamas!",
-        "withdrawTitle": "Išimkite savo pajamas",
-        "withdrawMessage": "Minimali balanso suma, kad būtų galima išimti: 20,00 USD"
-    },
-    "lv": {
-        "title": "Pelni naudu, noklikšķinot uz sludinājumiem!",
-        "instructions": "Pelni no 0,02 līdz 0,04 USD par klikšķi. Pelni 5 USD, ja reģistrējies sludinājumā. Reģistrējies un maksimizē savus ienākumus!",
-        "withdrawTitle": "Izņemiet savus ienākumus",
-        "withdrawMessage": "Minimālais atlikums izņemšanai: 20,00 USD"
-    },
-    "et": {
-        "title": "Teenige raha, klõpsates reklaamidele!",
-        "instructions": "Teenige reklaami kliki eest 0,02 kuni 0,04 dollarit. Teenige 5 dollarit, kui registreerute reklaamis. Registreeruge reklaamis ja maksimeerige oma tulu!",
-        "withdrawTitle": "Võtke oma tulud välja",
-        "withdrawMessage": "Minimaalne saldo väljavõtmiseks: 20,00 $"
-    }
-
-            };
-
-            document.getElementById('page-title').textContent = translations[lang].title;
-            document.getElementById('instructions-title').textContent = "Instructions:"; // Static title
-            document.getElementById('instructions-text').textContent = translations[lang].instructions;
-            document.getElementById('withdraw-title').textContent = translations[lang].withdrawTitle;
-            document.getElementById('withdraw-message').textContent = translations[lang].withdrawMessage;
+            const language = document.getElementById('languageSelect').value;
+            document.getElementById('page-title').innerText = translations[language].title;
+            document.getElementById('instructions-title').innerText = translations[language].instructionsTitle;
+            document.getElementById('instructions-text').innerHTML = translations[language].instructionsText;
+            document.getElementById('offer-title').innerText = translations[language].offerTitle;
+            document.getElementById('withdraw-info').innerText = translations[language].withdrawInfo;
+            document.getElementById('bonus-title').innerText = translations[language].bonusTitle;
+            document.getElementById('bonus-text').innerText = translations[language].bonusText;
+            document.getElementById('footer-text').innerHTML = translations[language].footerText;
         }
     </script>
 </body>
 </html>
+
+
+
