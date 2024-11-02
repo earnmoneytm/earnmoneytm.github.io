@@ -1,38 +1,105 @@
-<form id="registrationForm">
-    <input type="text" id="name" name="NAME" required placeholder="Your Name">
-    <input type="email" id="email" name="EMAIL" required placeholder="Your Email">
-    <button type="submit">Get Started Now!</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earn $1,000 a Month</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #28a745;
+            font-size: 24px;
+        }
+        p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        input[type="text"],
+        input[type="email"] {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .success-message {
+            display: none;
+            color: #28a745;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Unlock Your Path to Earning $1,000 a Month!</h1>
+        <p>Join countless others who are discovering how easy it is to earn money from home. Don’t miss out on this amazing opportunity!</p>
+        
+        <form id="registrationForm">
+            <input type="text" id="name" name="NAME" required placeholder="Your Name">
+            <input type="email" id="email" name="EMAIL" required placeholder="Your Email">
+            <button type="submit">Get Started Now!</button>
+        </form>
+        <div class="success-message" id="successMessage">Success! Check your email for further instructions.</div>
+    </div>
 
-<script>
-    document.getElementById('registrationForm').onsubmit = function(event) {
-        event.preventDefault(); // Evita que el formulario se envíe de la forma tradicional
-        const formData = new FormData(this); // Recoge los datos del formulario
-
-        fetch('https://script.google.com/macros/s/AKfycbyyqdgbOC5IHLJn3vEiWaTkMVMg5gxPzMxRHvKZk7b863KacEuS9jpS3xsxv7GKNjUE0w/exec', {
-            method: 'POST',
-            body: formData,
-            mode: 'cors', // Modo CORS para manejar solicitudes cross-origin
-            headers: {
-                'Accept': 'text/plain', // Aceptar texto plano como respuesta
-            }
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok: ' + response.statusText);
-            }
-            return response.text(); // Procesar la respuesta como texto
-        })
-        .then(data => {
-            alert('Success! Check your email for further instructions.');
-            this.reset(); // Reiniciar el formulario
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('There was an error sending your data: ' + error.message);
-        });
-    };
-</script>
-
+    <script>
+        document.getElementById('registrationForm').onsubmit = function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            fetch('https://script.google.com/macros/s/AKfycbzGti_CJ-JTYTOBRRqK2jQpxqw4z1_euvDoeU3mJMRifkJr6Gya9tCA8_1hgxkIkngeaw/exec', {
+                method: 'POST',
+                body: formData,
+                mode: 'cors',
+                headers: {
+                    'Accept': 'text/plain',
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('successMessage').style.display = 'block';
+                this.reset(); // Resetear el formulario
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error sending your data: ' + error.message);
+            });
+        };
+    </script>
+</body>
+</html>
 
 
