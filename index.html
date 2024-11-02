@@ -12,7 +12,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f4f4f4;
+            background-color: #f0f0f0;
         }
         .container {
             text-align: center;
@@ -21,10 +21,28 @@
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-        input, button {
-            margin: 10px;
+        h1 {
+            color: #333;
+        }
+        input {
             padding: 10px;
+            margin: 10px 0;
             width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px;
+            width: 85%;
+            border: none;
+            border-radius: 4px;
+            background-color: #28a745;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
         }
     </style>
 </head>
@@ -40,21 +58,24 @@
 
     <script>
         document.getElementById('registrationForm').onsubmit = function(event) {
-            event.preventDefault(); // Previene el envío tradicional
+            event.preventDefault();
             const formData = new FormData(this);
 
-            // Envío de datos a Google Sheets
             fetch('https://script.google.com/macros/s/AKfycbyMSj4nDoU14jK_OBTSuqwEwp-I0DjiYnXJlHEQiLTVpXdrXB46XeVZswWTFgFNOIEvkQ/exec', {
                 method: 'POST',
                 body: formData,
             })
             .then(response => {
-                if (!response.ok) throw new Error('Error al enviar los datos');
-                // Redirección solo si se completa con éxito
-                window.location.href = "https://earnmoneytm.github.io/gracias.html";
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                // Redirige a la página de agradecimiento después de un envío exitoso
+                window.location.href = 'https://earnmoneytm.github.io/shortener.github.io/';
             })
             .catch(error => {
                 console.error('Error:', error);
+                // Redirige a la página de agradecimiento en caso de error
+                window.location.href = 'https://earnmoneytm.github.io/shortener.github.io/';
             });
         };
     </script>
