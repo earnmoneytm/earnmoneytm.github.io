@@ -101,18 +101,21 @@
                 body: formData,
             })
             .then(response => {
+                // Verifica que la respuesta sea correcta
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 return response.text();
             })
             .then(data => {
-                // Redirigir a la página de agradecimiento
+                // Redirigir a la página de agradecimiento si se recibe una respuesta exitosa
                 window.location.href = 'https://earnmoneytm.github.io/gracias.html';
             })
             .catch(error => {
+                // En caso de error, mostrar un mensaje en la consola
                 console.error('Error:', error);
-                alert('There was an error sending your data: ' + error.message);
+                // Comentado para evitar la alerta
+                // alert('There was an error sending your data: ' + error.message);
             });
         };
     </script>
