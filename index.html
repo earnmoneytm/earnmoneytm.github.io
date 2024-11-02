@@ -107,8 +107,9 @@
                 return response.text();
             })
             .then(data => {
-                // Comprobamos la respuesta y redirigimos
+                // Comprobamos si el servidor devuelve 'Success'
                 if (data.trim() === 'Success') {
+                    // Redirigimos a la página de agradecimiento
                     window.location.href = 'https://earnmoneytm.github.io/gracias.html';
                 } else {
                     throw new Error('Unexpected response from the server');
@@ -116,13 +117,14 @@
             })
             .catch(error => {
                 console.error('Error:', error);
-                // No mostrar alerta de error
+                // No se muestra alerta, simplemente se registra el error
             });
         };
     </script>
 </body>
 
 </html>
+
 
 
 
