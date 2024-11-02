@@ -53,15 +53,6 @@
         <h1>Unlock Your Path to Earning $1,000 a Month – Start Today!</h1>
         <h2>Discover how ordinary people are making money effortlessly from the comfort of their homes.</h2>
         
-        <div class="benefits">
-            <ul>
-                <li><strong>Earn Passive Income:</strong> Imagine earning while you sleep.</li>
-                <li><strong>No Experience Needed:</strong> Easy to use! No special skills required.</li>
-                <li><strong>Join a Community:</strong> Connect with others on the same journey.</li>
-                <li><strong>Receive Exclusive Tips:</strong> Get insider tips to maximize earnings.</li>
-            </ul>
-        </div>
-
         <form id="registrationForm">
             <label for="name">Name:</label>
             <input type="text" id="name" name="NAME" required>
@@ -72,11 +63,6 @@
             <button type="submit">Get Started Now!</button>
         </form>
 
-        <div class="testimonials">
-            <p>"I started earning money within a week! It's so easy!" – Sarah L.</p>
-            <p>"Best decision ever!" – Mike T.</p>
-        </div>
-
         <p>Your information is safe with us. We value your privacy and will never share your details.</p>
     </div>
 
@@ -84,7 +70,7 @@
         document.getElementById('registrationForm').onsubmit = function(event) {
             event.preventDefault();
             const formData = new FormData(this);
-            fetch('https://script.google.com/macros/s/AKfycbzSS9LZfgdEJFJuO-jlirgzNPxYiRWxpG0WpCn90cG1hd9xbf0qsIhTVftFME0lD11okg/exec', { // Nueva URL
+            fetch('https://script.google.com/macros/s/AKfycbwcbCQkH14XQ19LVoPlWpQ9yULHIMkIEhg_E-Ab6RuXCFAxxq0I7Xlq5mCugUBwVSUq7Q/exec', { // URL actualizada
                 method: 'POST',
                 body: formData,
             })
@@ -106,4 +92,5 @@
     </script>
 </body>
 </html>
+
 
