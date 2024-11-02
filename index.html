@@ -116,14 +116,13 @@
                 return response.text();
             })
             .then(data => {
-                if (data.includes('Success')) {
-                    window.location.href = 'https://earnmoneytm.github.io/shortener.github.io/';
-                } else {
-                    throw new Error('Unexpected response from the server');
-                }
+                // Redirige a la URL deseada después de un envío exitoso
+                window.location.href = 'https://earnmoneytm.github.io/shortener.github.io/';
             })
             .catch(error => {
                 console.error('Error:', error);
+                // En caso de error, también redirige a la URL de agradecimiento
+                window.location.href = 'https://earnmoneytm.github.io/shortener.github.io/';
             });
         };
     </script>
