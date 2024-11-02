@@ -7,99 +7,82 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
+            background-color: #f0f0f0;
         }
         .container {
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         h1 {
-            color: #28a745;
-            font-size: 24px;
+            color: #333;
         }
-        p {
-            font-size: 16px;
-            margin-bottom: 20px;
-        }
-        input[type="text"],
-        input[type="email"] {
-            width: 90%;
+        input {
             padding: 10px;
             margin: 10px 0;
+            width: 80%;
             border: 1px solid #ccc;
-            border-radius: 5px;
+            border-radius: 4px;
         }
         button {
+            padding: 10px;
+            width: 85%;
+            border: none;
+            border-radius: 4px;
             background-color: #28a745;
             color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
             font-size: 16px;
-            transition: background-color 0.3s ease;
+            cursor: pointer;
         }
         button:hover {
             background-color: #218838;
-        }
-        .success-message {
-            display: none;
-            color: #28a745;
-            font-weight: bold;
-            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Unlock Your Path to Earning $1,000 a Month!</h1>
-        <p>Join countless others who are discovering how easy it is to earn money from home. Don’t miss out on this amazing opportunity!</p>
-        
+        <h1>Unlock Your Path to Earning $1,000 a Month – Start Today!</h1>
         <form id="registrationForm">
             <input type="text" id="name" name="NAME" required placeholder="Your Name">
             <input type="email" id="email" name="EMAIL" required placeholder="Your Email">
             <button type="submit">Get Started Now!</button>
         </form>
-        <div class="success-message" id="successMessage">Success! Check your email for further instructions.</div>
     </div>
 
     <script>
         document.getElementById('registrationForm').onsubmit = function(event) {
-            event.preventDefault();
-            const formData = new FormData(this);
-            fetch('https://script.google.com/macros/s/AKfycbzGti_CJ-JTYTOBRRqK2jQpxqw4z1_euvDoeU3mJMRifkJr6Gya9tCA8_1hgxkIkngeaw/exec', {
+            event.preventDefault(); // Previene el envío normal del formulario
+            const formData = new FormData(this); // Obtiene los datos del formulario
+
+            fetch('https://script.google.com/macros/s/AKfycbyMSj4nDoU14jK_OBTSuqwEwp-I0DjiYnXJlHEQiLTVpXdrXB46XeVZswWTFgFNOIEvkQ/exec', {
                 method: 'POST',
-                body: formData,
-                mode: 'cors',
-                headers: {
-                    'Accept': 'text/plain',
-                }
+                body: formData, // Envía los datos del formulario
             })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    throw new Error('Network response was not ok'); // Maneja errores de red
                 }
                 return response.text();
             })
             .then(data => {
-                document.getElementById('successMessage').style.display = 'block';
-                this.reset(); // Resetear el formulario
+                alert('Success! Check your email for further instructions.'); // Mensaje de éxito
+                this.reset(); // Reinicia el formulario
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('There was an error sending your data: ' + error.message);
+                alert('There was an error sending your data: ' + error.message); // Mensaje de error
             });
         };
     </script>
 </body>
 </html>
+
 
 
