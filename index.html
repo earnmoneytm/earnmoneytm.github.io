@@ -40,22 +40,18 @@
 
     <script>
         document.getElementById('registrationForm').onsubmit = function(event) {
-            event.preventDefault();
+            event.preventDefault(); // Previene el envío tradicional
             const formData = new FormData(this);
 
+            // Envío de datos a Google Sheets
             fetch('https://script.google.com/macros/s/AKfycbyMSj4nDoU14jK_OBTSuqwEwp-I0DjiYnXJlHEQiLTVpXdrXB46XeVZswWTFgFNOIEvkQ/exec', {
                 method: 'POST',
                 body: formData,
             })
             .then(response => {
-                if (!response.ok) throw new Error('Network response was not ok');
-                return response.text();
-            })
-            .then(data => {
-                // Añadimos un timeout para dar margen a la redirección.
-                setTimeout(() => {
-                    window.location.href = "https://earnmoneytm.github.io/gracias.html";
-                }, 1000); // Tiempo de espera de 1 segundo
+                if (!response.ok) throw new Error('Error al enviar los datos');
+                // Redirección solo si se completa con éxito
+                window.location.href = "https://earnmoneytm.github.io/gracias.html";
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -64,6 +60,7 @@
     </script>
 </body>
 </html>
+
 
 
 
