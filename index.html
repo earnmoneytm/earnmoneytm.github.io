@@ -106,8 +106,10 @@
             })
             .then(data => {
                 if (data.trim() === 'Success') {
-                    // Redirige a la página de agradecimiento
-                    window.location.href = 'https://earnmoneytm.github.io/gracias.html';
+                    // Redirige a la página de agradecimiento después de un pequeño retraso
+                    setTimeout(() => {
+                        window.location.href = 'https://earnmoneytm.github.io/gracias.html';
+                    }, 500); // Espera medio segundo antes de redirigir
                 } else {
                     throw new Error('Unexpected response from the server');
                 }
@@ -115,10 +117,11 @@
             .catch(error => {
                 console.error('Error:', error);
             });
-        };
+    };
     </script>
 </body>
 </html>
+
 
 
 
