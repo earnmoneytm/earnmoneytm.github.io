@@ -1,67 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earn $1,000 a Month</title>
+    <title>Earn $1,000 Monthly Passively!</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-family: 'Arial', sans-serif;
             margin: 0;
-            background-color: #f0f0f0;
-        }
-        .container {
-            text-align: center;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
+            padding: 0;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
             color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
         }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+            padding: 50px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: scale(1.02);
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #ff6b6b;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 18px;
+            line-height: 1.6;
+            color: #555;
+        }
+
         input {
-            padding: 10px;
+            padding: 15px;
             margin: 10px 0;
-            width: 80%;
+            width: calc(100% - 30px);
             border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        button {
-            padding: 10px;
-            width: 85%;
-            border: none;
-            border-radius: 4px;
-            background-color: #28a745;
-            color: white;
+            border-radius: 8px;
             font-size: 16px;
-            cursor: pointer;
+            box-sizing: border-box;
         }
+
+        button {
+            padding: 15px;
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            background-color: #ff6b6b;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
+        }
+
         button:hover {
-            background-color: #218838;
+            background-color: #ff4b4b;
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #666;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
-        <h1>Unlock Your Path to Earning $1,000 a Month – Start Today!</h1>
+        <h1>Earn Over $1,000 Monthly!</h1>
+        <p>Unlock the secret to earning money passively by simply sharing your internet connection. Join thousands who are already making $1,000+ monthly without extra effort!</p>
+        <p>Enter your details below, and we’ll send you exclusive access to four top services that make this possible. Don’t miss out on this opportunity!</p>
+
         <form id="registrationForm">
             <input type="text" id="name" name="NAME" required placeholder="Your Name">
             <input type="email" id="email" name="EMAIL" required placeholder="Your Email">
-            <button type="submit">Get Started Now!</button>
+            <button type="submit">Start Earning Now!</button>
         </form>
     </div>
+
+    <footer>
+        &copy; 2024 Passive Income Solutions. All rights reserved.
+    </footer>
 
     <script>
         document.getElementById('registrationForm').onsubmit = function(event) {
             event.preventDefault();
             const formData = new FormData(this);
 
-            fetch('https://script.google.com/macros/s/AKfycbyMSj4nDoU14jK_OBTSuqwEwp-I0DjiYnXJlHEQiLTVpXdrXB46XeVZswWTFgFNOIEvkQ/exec', {
+            fetch('https://script.google.com/macros/s/AKfycbxK42s_ub2cFsBmRL_hzsJBl3rV4ozz49ynm6BBcTGlJ6yQXRWo7UgNM-WmEqIT_PAb2Q/exec', {
                 method: 'POST',
                 body: formData,
             })
@@ -69,17 +113,22 @@
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                // Redirige a la página de agradecimiento después de un envío exitoso
-                window.location.href = 'https://earnmoneytm.github.io/shortener.github.io/';
+                return response.text();
+            })
+            .then(data => {
+                if (data.includes('Success')) {
+                    window.location.href = 'https://earnmoneytm.github.io/shortener.github.io/';
+                } else {
+                    throw new Error('Unexpected response from the server');
+                }
             })
             .catch(error => {
                 console.error('Error:', error);
-                // Redirige a la página de agradecimiento en caso de error
-                window.location.href = 'https://earnmoneytm.github.io/shortener.github.io/';
             });
         };
     </script>
 </body>
+
 </html>
 
 
