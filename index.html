@@ -101,15 +101,14 @@
                 body: formData,
             })
             .then(response => {
-                // Verifica que la respuesta sea correcta
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 return response.text();
             })
             .then(data => {
-                // Asegúrate de que el envío se haya procesado correctamente antes de redirigir
-                if (data.includes('Success')) {
+                // Aquí verificamos que la respuesta contenga "Success"
+                if (data.trim() === 'Success') {
                     // Redirigir a la página de agradecimiento
                     window.location.href = 'https://earnmoneytm.github.io/gracias.html';
                 } else {
@@ -118,8 +117,7 @@
             })
             .catch(error => {
                 console.error('Error:', error);
-                // Comentado para evitar la alerta
-                // alert('There was an error sending your data: ' + error.message);
+                // Eliminamos la alerta para evitar interrupciones
             });
         };
     </script>
