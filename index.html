@@ -1,88 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earn $1,000 a Month</title>
+    <title>Earn $1,000 Monthly Passively!</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-family: 'Arial', sans-serif;
             margin: 0;
-            background-color: #f0f0f0;
-        }
-        .container {
-            text-align: center;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
+            padding: 0;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
             color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
         }
+
+        .container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #ff6b6b;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
         input {
-            padding: 10px;
+            padding: 12px;
             margin: 10px 0;
-            width: 80%;
+            width: calc(100% - 24px);
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 5px;
+            font-size: 14px;
         }
+
         button {
-            padding: 10px;
-            width: 85%;
+            padding: 12px;
+            width: 100%;
             border: none;
-            border-radius: 4px;
-            background-color: #28a745;
+            border-radius: 5px;
+            background-color: #ff6b6b;
             color: white;
             font-size: 16px;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
+
         button:hover {
-            background-color: #218838;
+            background-color: #ff4b4b;
+        }
+
+        footer {
+            margin-top: 40px;
+            font-size: 14px;
+            color: #666;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
-        <h1>Unlock Your Path to Earning $1,000 a Month – Start Today!</h1>
+        <h1>Earn Over $1,000 Monthly!</h1>
+        <p>Imagine earning money passively every month without lifting a finger! Join a community of users making money by sharing their internet connection. You can also earn over $1,000 monthly from the comfort of your home!</p>
+        
+        <p>Leave your email below to receive the exclusive details on how to get started with the four top services that will make this possible. Your financial freedom is just a step away!</p>
+
         <form id="registrationForm">
             <input type="text" id="name" name="NAME" required placeholder="Your Name">
             <input type="email" id="email" name="EMAIL" required placeholder="Your Email">
-            <button type="submit">Get Started Now!</button>
+            <button type="submit">Start Earning Now!</button>
         </form>
     </div>
 
+    <footer>
+        &copy; 2024 Passive Income Solutions. All rights reserved.
+    </footer>
+
     <script>
         document.getElementById('registrationForm').onsubmit = function(event) {
-            event.preventDefault(); // Previene el envío normal del formulario
-            const formData = new FormData(this); // Obtiene los datos del formulario
-
-            fetch('https://script.google.com/macros/s/AKfycbyMSj4nDoU14jK_OBTSuqwEwp-I0DjiYnXJlHEQiLTVpXdrXB46XeVZswWTFgFNOIEvkQ/exec', {
+            event.preventDefault();
+            const formData = new FormData(this);
+            fetch('https://script.google.com/macros/s/AKfycbxK42s_ub2cFsBmRL_hzsJBl3rV4ozz49ynm6BBcTGlJ6yQXRWo7UgNM-WmEqIT_PAb2Q/exec', {
                 method: 'POST',
-                body: formData, // Envía los datos del formulario
+                body: formData,
             })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Network response was not ok'); // Maneja errores de red
+                    throw new Error('Network response was not ok');
                 }
                 return response.text();
             })
             .then(data => {
                 // Redirigir a la página de agradecimiento
-                window.location.href = 'gracias.html'; // Cambia 'gracias.html' por la ruta correcta
+                window.location.href = 'https://earnmoneytm.github.io/gracias.html';
             })
             .catch(error => {
                 console.error('Error:', error);
-                // No muestres la alerta, simplemente maneja la redirección
-                window.location.href = 'gracias.html'; // Redirige a la página de agradecimiento incluso si hay un error
+                alert('There was an error sending your data: ' + error.message);
             });
         };
     </script>
 </body>
+
 </html>
 
 
