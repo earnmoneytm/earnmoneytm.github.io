@@ -1,97 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earn $1,000 a Month</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            text-align: center;
-            padding: 20px;
-        }
+<form id="registrationForm">
+    <input type="text" id="name" name="NAME" required placeholder="Your Name">
+    <input type="email" id="email" name="EMAIL" required placeholder="Your Email">
+    <button type="submit">Get Started Now!</button>
+</form>
 
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
+<script>
+    document.getElementById('registrationForm').onsubmit = function(event) {
+        event.preventDefault(); // Evita que el formulario se envíe de la forma tradicional
+        const formData = new FormData(this); // Recoge los datos del formulario
 
-        h1 {
-            color: #27ae60;
-        }
-
-        button {
-            background-color: #27ae60;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #219150;
-        }
-
-        input[type="text"], input[type="email"] {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Unlock Your Path to Earning $1,000 a Month – Start Today!</h1>
-        <h2>Discover how ordinary people are making money effortlessly from the comfort of their homes.</h2>
-        
-        <form id="registrationForm">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="NAME" required>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="EMAIL" required>
-
-            <button type="submit">Get Started Now!</button>
-        </form>
-
-        <p>Your information is safe with us. We value your privacy and will never share your details.</p>
-    </div>
-
-    <script>
-        document.getElementById('registrationForm').onsubmit = function(event) {
-            event.preventDefault();
-            const formData = new FormData(this);
-            fetch('https://script.google.com/macros/s/AKfycbyKF3nBRtTH1Nplr2DMQfjGUaKVK9oEm5-cD8X8T08Q2J9oHkvlDbd4E_JOMNFBUXkUJA/exec', {
-                method: 'POST',
-                body: formData,
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.text();
-            })
-            .then(data => {
-                alert('Success! Check your email for further instructions.');
-                this.reset(); // Resetear campos del formulario
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('There was an error sending your data: ' + error.message);
-            });
-        };
-    </script>
-</body>
-</html>
+        fetch('https://script.google.com/macros/s/AKfycbyyqdgbOC5IHLJn3vEiWaTkMVMg5gxPzMxRHvKZk7b863KacEuS9jpS3xsxv7GKNjUE0w/exec', {
+            method: 'POST',
+            body: formData,
+            mode: 'cors', // Modo CORS para manejar solicitudes cross-origin
+            headers: {
+                'Accept': 'text/plain', // Aceptar texto plano como respuesta
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok: ' + response.statusText);
+            }
+            return response.text(); // Procesar la respuesta como texto
+        })
+        .then(data => {
+            alert('Success! Check your email for further instructions.');
+            this.reset(); // Reiniciar el formulario
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('There was an error sending your data: ' + error.message);
+        });
+    };
+</script>
 
 
 
