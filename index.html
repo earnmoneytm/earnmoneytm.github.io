@@ -72,17 +72,19 @@
                 return response.text();
             })
             .then(data => {
-                alert('Success! Check your email for further instructions.'); // Mensaje de éxito
-                this.reset(); // Reinicia el formulario
+                // Redirigir a la página de agradecimiento
+                window.location.href = 'gracias.html'; // Cambia 'gracias.html' por la ruta correcta
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('There was an error sending your data: ' + error.message); // Mensaje de error
+                // No muestres la alerta, simplemente maneja la redirección
+                window.location.href = 'gracias.html'; // Redirige a la página de agradecimiento incluso si hay un error
             });
         };
     </script>
 </body>
 </html>
+
 
 
 
