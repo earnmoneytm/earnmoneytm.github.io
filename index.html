@@ -84,7 +84,7 @@
         document.getElementById('registrationForm').onsubmit = function(event) {
             event.preventDefault();
             const formData = new FormData(this);
-            fetch('https://script.google.com/macros/s/AKfycbzgJYo2AJjQSgTPeOPFhUbAECRCab91kX2VxtQl4hXz1EmzOkF6l9JITKD8ZBDz9l4zMQ/exec', { // URL del script
+            fetch('https://script.google.com/macros/s/AKfycbzSS9LZfgdEJFJuO-jlirgzNPxYiRWxpG0WpCn90cG1hd9xbf0qsIhTVftFME0lD11okg/exec', { // Nueva URL
                 method: 'POST',
                 body: formData,
             })
@@ -96,11 +96,11 @@
             })
             .then(data => {
                 alert('Success! Check your email for further instructions.');
-                this.reset(); // Reset form fields
+                this.reset(); // Resetear campos del formulario
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('There was an error sending your data. Please try again later.');
+                alert('There was an error sending your data: ' + error.message);
             });
         };
     </script>
