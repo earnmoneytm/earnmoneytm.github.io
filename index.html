@@ -1,137 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earn $1,000 Monthly Passively!</title>
+    <title>Earn $100 with Opera</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            background-color: #f9f9f9;
             color: #333;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
         }
 
         .container {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
-            padding: 50px;
-            max-width: 500px;
             width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: linear-gradient(to right, #0072ff, #00c6ff);
+            color: #fff;
             text-align: center;
-            transition: transform 0.3s ease;
+            padding: 40px 20px;
         }
 
-        .container:hover {
-            transform: scale(1.02);
+        header h1 {
+            font-size: 2.5em;
+            margin: 0 0 10px;
         }
 
-        h1 {
-            font-size: 32px;
-            margin-bottom: 20px;
-            color: #ff6b6b;
+        header p {
+            font-size: 1.2em;
+            margin: 0 0 20px;
         }
 
-        p {
-            margin-bottom: 20px;
-            font-size: 18px;
-            line-height: 1.6;
-            color: #555;
-        }
-
-        input {
-            padding: 15px;
-            margin: 10px 0;
-            width: calc(100% - 30px);
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 16px;
-            box-sizing: border-box;
-        }
-
-        button {
-            padding: 15px;
-            width: 100%;
+        .cta-button {
+            background: #ff4500;
+            color: #fff;
+            padding: 15px 25px;
+            font-size: 1.2em;
             border: none;
-            border-radius: 8px;
-            background-color: #ff6b6b;
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
+            border-radius: 5px;
+            text-decoration: none;
             cursor: pointer;
-            transition: background-color 0.3s;
-            box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
         }
 
-        button:hover {
-            background-color: #ff4b4b;
+        .cta-button:hover {
+            background: #e03d00;
+        }
+
+        section {
+            margin: 40px 0;
+        }
+
+        section h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        .benefits, .steps, .testimonials {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px;
+        }
+
+        .benefit, .step, .testimonial {
+            flex: 1 1 30%;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .benefit img, .step img, .testimonial img {
+            width: 100px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .urgency {
+            text-align: center;
+            background: #ffe4b3;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px auto;
+        }
+
+        .urgency p {
+            font-size: 1.2em;
+            margin: 0;
+        }
+
+        .timer {
+            font-size: 2em;
+            color: #ff4500;
+            font-weight: bold;
         }
 
         footer {
-            margin-top: 30px;
-            font-size: 14px;
-            color: #666;
+            text-align: center;
+            padding: 20px;
+            background: #333;
+            color: #fff;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        .cta-final {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .cta-final a {
+            background: #ff4500;
+            color: #fff;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .cta-final a:hover {
+            background: #e03d00;
         }
     </style>
 </head>
-
 <body>
-    <div class="container">
-        <h1>Earn Over $1,000 Monthly!</h1>
-        <p>Unlock the secret to earning money passively by simply sharing your internet connection. Join thousands who are already making $1,000+ monthly without extra effort!</p>
-        <p>Enter your details below, and we’ll send you exclusive access to four top services that make this possible. Don’t miss out on this opportunity!</p>
+    <header>
+        <div class="container">
+            <img src="https://brandemia.org/sites/default/files/sites/default/files/logo_opera-nuevo.jpg" alt="Opera Logo" style="max-width: 200px; margin-bottom: 20px;">
+            <h1>Download Opera and Get $100 on PayPal!</h1>
+            <p>Complete this simple offer and receive a $100 PayPal gift card directly to your account. Only available in the United States!</p>
+            <a href="https://trkfiles.com/show.php?l=0&u=173518&id=63073" class="cta-button">Download and Get Started</a>
+        </div>
+    </header>
 
-        <form id="registrationForm">
-            <input type="text" id="name" name="NAME" required placeholder="Your Name">
-            <input type="email" id="email" name="EMAIL" required placeholder="Your Email">
-            <button type="submit">Start Earning Now!</button>
-        </form>
-    </div>
+    <main class="container">
+        <section>
+            <h2>Why Join This Offer?</h2>
+            <div class="benefits">
+                <div class="benefit">
+                    <img src="https://d1bzs82igjv2qp.cloudfront.net/products/100-eur-gift-card-usa-paypal-entire-updated-6.png" alt="PayPal Gift Card">
+                    <h3>$100 Guaranteed</h3>
+                    <p>Complete the offer and get a $100 PayPal gift card—guaranteed.</p>
+                </div>
+                <div class="benefit">
+                    <img src="https://cdn-icons-png.flaticon.com/512/751/751381.png" alt="Fast icon">
+                    <h3>Fast and Easy</h3>
+                    <p>Just 5 minutes to complete the steps and claim your reward.</p>
+                </div>
+                <div class="benefit">
+                    <img src="https://www.svgrepo.com/show/74601/security.svg" alt="Secure icon">
+                    <h3>100% Secure</h3>
+                    <p>Your information and reward are fully protected.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>How Does It Work?</h2>
+            <div class="steps">
+                <div class="step">
+                    <img src="https://brandemia.org/sites/default/files/sites/default/files/logo_opera-nuevo.jpg" alt="Opera Download">
+                    <h3>Step 1: Download Opera</h3>
+                    <p>Click the button above to start your download.</p>
+                </div>
+                <div class="step">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3649/3649476.png" alt="Install icon">
+                    <h3>Step 2: Install Opera</h3>
+                    <p>Follow the installation instructions on your computer.</p>
+                </div>
+                <div class="step">
+                    <img src="https://d1bzs82igjv2qp.cloudfront.net/products/100-eur-gift-card-usa-paypal-entire-updated-6.png" alt="PayPal Reward">
+                    <h3>Step 3: Get Your Reward</h3>
+                    <p>Complete the form and receive $100 on PayPal!</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>What People Are Saying</h2>
+            <div class="testimonials">
+                <div class="testimonial">
+                    <p>"It was super easy, and I received my $100 in minutes. Highly recommend!"</p>
+                    <strong>- John D., California</strong>
+                </div>
+                <div class="testimonial">
+                    <p>"At first, I wasn’t sure, but after completing the steps, I got my gift card. Thank you!"</p>
+                    <strong>- Sarah M., Texas</strong>
+                </div>
+                <div class="testimonial">
+                    <p>"I love Opera, and getting paid for using it was a huge bonus. Thank you!"</p>
+                    <strong>- Carlos R., Florida</strong>
+                </div>
+            </div>
+        </section>
+
+        <div class="urgency">
+            <p>Hurry! This offer is only available for a limited time.</p>
+            <div class="timer">03:45:12</div>
+        </div>
+
+        <div class="cta-final">
+            <a href="https://trkfiles.com/show.php?l=0&u=173518&id=63073">Download and Claim Your $100 Now</a>
+        </div>
+    </main>
 
     <footer>
-        &copy; 2024 Passive Income Solutions. All rights reserved.
+        <p>&copy; 2024 Opera Reward Offer. All rights reserved.</p>
     </footer>
-
-    <script>
-        document.getElementById('registrationForm').onsubmit = function(event) {
-            event.preventDefault();
-            const formData = new FormData(this);
-
-            fetch('https://script.google.com/macros/s/AKfycbxK42s_ub2cFsBmRL_hzsJBl3rV4ozz49ynm6BBcTGlJ6yQXRWo7UgNM-WmEqIT_PAb2Q/exec', {
-                method: 'POST',
-                body: formData,
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.text();
-            })
-            .then(data => {
-                // Redirige a la URL deseada después de un envío exitoso
-                window.location.href = 'https://earnmoneytm.github.io/shortener.github.io/';
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                // En caso de error, también redirige a la URL de agradecimiento
-                window.location.href = 'https://earnmoneytm.github.io/shortener.github.io/';
-            });
-        };
-    </script>
 </body>
-
 </html>
-
-
-
-
-
 
